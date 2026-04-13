@@ -1,0 +1,303 @@
+﻿@{
+    ViewData["Title"] = "Dịch vụ";
+}
+
+@await Html.PartialAsync("_PageHero", new PageHeroVm {
+    Title = "DỊCH VỤ",
+    BreadcrumbText = "Dịch vụ",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=2000&q=70"
+})
+
+<section class="service-page">
+    <div class="container service-page__container">
+
+        <!-- Service Introduction -->
+        <header class="service-intro" data-aos="fade-up">
+            <span class="section-badge">Dịch vụ chuyên nghiệp</span>
+            <h2 class="section-title">Cam kết mang đến<br/><span class="highlight">dịch vụ tốt nhất</span></h2>
+            <p class="section-description">
+                SG Energy cung cấp đầy đủ các dịch vụ từ tư vấn, thiết kế, lắp đặt đến bảo trì và vận hành hệ thống năng lượng tái tạo.
+                Chúng tôi cam kết mang đến giải pháp toàn diện với chất lượng vượt trội.
+            </p>
+        </header>
+
+        <!-- Main Services Grid -->
+        <div class="service-grid">
+            
+            <!-- Service 1: Tư vấn -->
+            <article class="service-card service-card--featured" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div class="service-card__badge">Miễn phí</div>
+                <h3 class="service-card__title">Tư vấn giải pháp</h3>
+                <p class="service-card__description">
+                    Đội ngũ chuyên gia giàu kinh nghiệm sẽ khảo sát và tư vấn giải pháp năng lượng tối ưu nhất phù hợp với nhu cầu và ngân sách của bạn.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Khảo sát hiện trạng miễn phí</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Phân tích nhu cầu sử dụng</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Tính toán hiệu quả đầu tư</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Đề xuất giải pháp tối ưu</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Nhận tư vấn ngay</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Service 2: Thiết kế -->
+            <article class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-drafting-compass"></i>
+                </div>
+                <h3 class="service-card__title">Thiết kế hệ thống</h3>
+                <p class="service-card__description">
+                    Thiết kế hệ thống năng lượng chuyên nghiệp với công nghệ hiện đại, đảm bảo hiệu suất cao và an toàn tuyệt đối.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Thiết kế 3D chi tiết</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Tính toán công suất chính xác</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Lựa chọn thiết bị tối ưu</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Dự toán chi phí minh bạch</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Service 3: Lắp đặt -->
+            <article class="service-card service-card--featured" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <div class="service-card__badge service-card__badge--hot">Hot</div>
+                <h3 class="service-card__title">Lắp đặt thi công</h3>
+                <p class="service-card__description">
+                    Thi công lắp đặt nhanh chóng với quy trình chuẩn hóa, đội ngũ kỹ thuật viên chuyên nghiệp, đảm bảo tiến độ và chất lượng.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Thi công đúng tiến độ</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Đội ngũ kỹ thuật lành nghề</li>
+                    <li><i class="fa-solid fa-check-circle"></i> An toàn lao động tuyệt đối</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Kiểm tra nghiệm thu kỹ lưỡng</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Đăng ký thi công</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Service 4: Vận hành -->
+            <article class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="service-card__title">Vận hành & Giám sát</h3>
+                <p class="service-card__description">
+                    Hệ thống giám sát thông minh 24/7, theo dõi hiệu suất hoạt động, cảnh báo sự cố và tối ưu hóa năng suất.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Giám sát trực tuyến 24/7</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Cảnh báo sự cố tức thì</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Báo cáo hiệu suất định kỳ</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Tối ưu hóa vận hành</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Service 5: Bảo trì -->
+            <article class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-tools"></i>
+                </div>
+                <h3 class="service-card__title">Bảo trì & Sửa chữa</h3>
+                <p class="service-card__description">
+                    Dịch vụ bảo trì định kỳ và sửa chữa nhanh chóng, đảm bảo hệ thống luôn hoạt động ổn định với hiệu suất tối ưu.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Bảo trì định kỳ theo lịch</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Sửa chữa nhanh chóng</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Thay thế linh kiện chính hãng</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Hỗ trợ khẩn cấp 24/7</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Đặt lịch bảo trì</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Service 6: Nâng cấp -->
+            <article class="service-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-card__icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+                <h3 class="service-card__title">Nâng cấp mở rộng</h3>
+                <p class="service-card__description">
+                    Nâng cấp và mở rộng hệ thống hiện có, tích hợp công nghệ mới để tăng công suất và hiệu quả sử dụng.
+                </p>
+                <ul class="service-card__features">
+                    <li><i class="fa-solid fa-check-circle"></i> Đánh giá hệ thống hiện tại</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Đề xuất phương án nâng cấp</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Tích hợp công nghệ mới</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Tăng công suất hiệu quả</li>
+                </ul>
+                <a href="~/Contact" class="service-card__btn">
+                    <span>Tư vấn nâng cấp</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </article>
+
+        </div>
+
+        <!-- Service Process -->
+        <section class="service-process" data-aos="fade-up">
+            <header class="section-header">
+                <span class="section-badge">Quy trình làm việc</span>
+                <h2 class="section-title">Quy trình dịch vụ<br/><span class="highlight">chuyên nghiệp</span></h2>
+                <p class="section-description">Chúng tôi tuân thủ quy trình làm việc chuyên nghiệp để đảm bảo chất lượng dịch vụ tốt nhất</p>
+            </header>
+
+            <div class="process-timeline">
+                <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+                    <div class="process-step__number">01</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Tiếp nhận yêu cầu</h3>
+                        <p class="process-step__desc">Lắng nghe và ghi nhận đầy đủ nhu cầu của khách hàng</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="200">
+                    <div class="process-step__number">02</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Khảo sát thực tế</h3>
+                        <p class="process-step__desc">Khảo sát hiện trạng và đo đạc chi tiết tại hiện trường</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+                    <div class="process-step__number">03</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Báo giá & Hợp đồng</h3>
+                        <p class="process-step__desc">Lập báo giá chi tiết và ký kết hợp đồng minh bạch</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="400">
+                    <div class="process-step__number">04</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Triển khai thực hiện</h3>
+                        <p class="process-step__desc">Thi công lắp đặt theo đúng tiến độ và chất lượng cam kết</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="500">
+                    <div class="process-step__number">05</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Nghiệm thu & Bàn giao</h3>
+                        <p class="process-step__desc">Kiểm tra, nghiệm thu và bàn giao hệ thống hoàn chỉnh</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right" data-aos-delay="600">
+                    <div class="process-step__number">06</div>
+                    <div class="process-step__icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="process-step__content">
+                        <h3 class="process-step__title">Hỗ trợ sau bán</h3>
+                        <p class="process-step__desc">Chăm sóc khách hàng và hỗ trợ kỹ thuật 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="service-why" data-aos="fade-up">
+            <div class="service-why__content">
+                <span class="section-badge">Lựa chọn hàng đầu</span>
+                <h2 class="section-title">Tại sao chọn<br/><span class="highlight">SG Energy?</span></h2>
+                <p class="section-description">
+                    Với hơn 10 năm kinh nghiệm trong lĩnh vực năng lượng tái tạo, SG Energy tự hào là đối tác tin cậy của hàng trăm doanh nghiệp và hộ gia đình trên toàn quốc.
+                </p>
+
+                <div class="why-features">
+                    <div class="why-feature">
+                        <div class="why-feature__icon">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <div class="why-feature__content">
+                            <h4>Đội ngũ chuyên nghiệp</h4>
+                            <p>Kỹ sư, kỹ thuật viên giàu kinh nghiệm và tay nghề cao</p>
+                        </div>
+                    </div>
+
+                    <div class="why-feature">
+                        <div class="why-feature__icon">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div class="why-feature__content">
+                            <h4>Chất lượng đảm bảo</h4>
+                            <p>Thiết bị chính hãng, quy trình thi công chuẩn quốc tế</p>
+                        </div>
+                    </div>
+
+                    <div class="why-feature">
+                        <div class="why-feature__icon">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <div class="why-feature__content">
+                            <h4>Cam kết bảo hành</h4>
+                            <p>Bảo hành dài hạn và hỗ trợ sau bán hàng tận tâm</p>
+                        </div>
+                    </div>
+
+                    <div class="why-feature">
+                        <div class="why-feature__icon">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                        <div class="why-feature__content">
+                            <h4>Giá cả cạnh tranh</h4>
+                            <p>Chi phí hợp lý nhất thị trường, minh bạch trong từng khoản</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <a href="~/Contact" class="btn-primary btn-large">
+                        <span>Liên hệ tư vấn ngay</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="tel:+84989100986" class="btn-secondary btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>(+84) 989 100 986</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/service.js" asp-append-version="true"></script>
+}

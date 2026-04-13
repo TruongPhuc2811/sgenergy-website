@@ -1,0 +1,203 @@
+﻿:root {
+    --btt-bottom: 32px; /* fallback nếu JS chưa chạy */
+    --btt-height: 48px; /* fallback */
+    --float-gap: 12px;
+}
+
+/* Nằm bên phải, và luôn nằm trên back-to-top */
+.float-contact {
+    position: fixed;
+    right: 30px;
+    left: auto;
+    bottom: calc(var(--btt-bottom) + var(--btt-height) + var(--float-gap));
+    z-index: 10050;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Button styles + hiệu ứng (giữ như bản trước) */
+.float-contact__btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 12px 28px rgba(0,0,0,.24);
+    position: relative;
+    overflow: visible;
+    transition: transform .14s ease, filter .14s ease;
+    will-change: transform;
+}
+
+    .float-contact__btn i {
+        font-size: 20px;
+    }
+
+.float-contact__btn--fb {
+    background: radial-gradient(circle at 30% 30%, #4f86ff, #1b4fd9);
+}
+
+.float-contact__btn--zalo {
+    background: radial-gradient(circle at 30% 30%, #3fb8ff, #1478d5);
+}
+
+.float-contact__btn--hotline {
+    background: radial-gradient(circle at 30% 30%, #ff4a4a, #d10a0a);
+}
+
+.float-contact__zalo {
+    font-weight: 1000;
+    font-size: 18px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Pulse ring */
+.float-contact__ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.65);
+    opacity: 0;
+    transform: scale(.72);
+    animation: floatPulse 1.35s ease-out infinite;
+}
+
+.float-contact__btn--fb .float-contact__ring {
+    animation-delay: .0s;
+}
+
+.float-contact__btn--zalo .float-contact__ring {
+    animation-delay: .2s;
+}
+
+.float-contact__btn--hotline .float-contact__ring {
+    animation-delay: .4s;
+}
+
+/* Rung mạnh */
+.float-contact__btn--hotline {
+    animation: floatShakeHard 2.6s ease-in-out infinite;
+}
+
+.float-contact__btn--fb {
+    animation: floatWobble 4.2s ease-in-out infinite;
+}
+
+.float-contact__btn--zalo {
+    animation: floatWobble 4.2s ease-in-out infinite;
+    animation-delay: .3s;
+}
+
+.float-contact__btn:hover {
+    transform: translateY(-2px) scale(1.06);
+    filter: brightness(1.08);
+}
+
+/* Tooltip hiện về bên trái */
+.float-contact__btn::after {
+    content: attr(aria-label);
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: rgba(17,17,17,.92);
+    color: #fff;
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .14s ease, transform .14s ease;
+}
+
+.float-contact__btn:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(-3px);
+}
+
+@keyframes floatPulse {
+    0% {
+        opacity: 0;
+        transform: scale(.72);
+    }
+
+    25% {
+        opacity: .6;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.28);
+    }
+}
+
+@keyframes floatWobble {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(2px) rotate(1.5deg);
+    }
+}
+
+@keyframes floatShakeHard {
+    0%, 82%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    84% {
+        transform: translateX(-3px) rotate(-8deg);
+    }
+
+    86% {
+        transform: translateX(3px) rotate(8deg);
+    }
+
+    88% {
+        transform: translateX(-3px) rotate(-8deg);
+    }
+
+    90% {
+        transform: translateX(3px) rotate(8deg);
+    }
+
+    92% {
+        transform: translateX(-2px) rotate(-6deg);
+    }
+
+    94% {
+        transform: translateX(2px) rotate(6deg);
+    }
+
+    96% {
+        transform: translateX(-1px) rotate(-3deg);
+    }
+
+    98% {
+        transform: translateX(1px) rotate(3deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .float-contact {
+        right: 12px;
+    }
+
+    .float-contact__btn {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .float-contact__btn,
+    .float-contact__ring {
+        animation: none !important;
+        transition: none !important;
+    }
+}

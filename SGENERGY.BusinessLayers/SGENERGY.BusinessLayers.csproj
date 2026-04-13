@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<!-- Cho phép dùng IFormFile, IWebHostEnvironment trong class library -->
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\SGENERGY.DataLayers\SGENERGY.DataLayers.csproj" />
+	  <ProjectReference Include="..\SGENERGY.DomainModels\SGENERGY.DomainModels.csproj" />
+	</ItemGroup>
+
+</Project>

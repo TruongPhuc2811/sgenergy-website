@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SG Energy - Công ty TNHH Dịch vụ và Kỹ thuật Năng lượng SG</title>
+    
+    <!-- Modern Design System - Load First -->
+    <link rel="stylesheet" href="~/css/modern-base.css" />
+    
+    <!-- Legacy & Page Specific Styles -->
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/page-shell.css" />
+    <link rel="stylesheet" href="~/css/floating-contact.css" />
+    
+    <!-- Modern Page Styles -->
+    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/css/contact-modern.css" />
+    <link rel="stylesheet" href="~/css/product-modern.css" />
+    <link rel="stylesheet" href="~/css/project-modern.css" />
+    <link rel="stylesheet" href="~/css/solutions.css" />
+    <link rel="stylesheet" href="~/css/service.css" />
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    
+    <!-- Page-specific styles -->
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <div class="site-header js-site-header">
+        @await Html.PartialAsync("_TopBar")
+        <header class="site-header__main">
+            @await Html.PartialAsync("_Header")
+        </header>
+    </div>
+
+    @RenderBody()
+
+    @await Html.PartialAsync("_FloatingContactIcons")
+
+    <footer>
+        @await Html.PartialAsync("_Footer")
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" type="button" title="Về đầu trang">&#8679;</button>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/script.js"></script>
+    <script src="~/js/header-sticky.js" asp-append-version="true"></script>
+    <!-- back-to-top phải đặt sau khi button đã có trong DOM -->
+    <script src="~/js/back-to-top.js" asp-append-version="true"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

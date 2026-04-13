@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Projet\**" />
+    <Content Remove="Views\Projet\**" />
+    <EmbeddedResource Remove="Views\Projet\**" />
+    <None Remove="Views\Projet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SGENERGY.BusinessLayers\SGENERGY.BusinessLayers.csproj" />
+    <ProjectReference Include="..\SGENERGY.DataLayers\SGENERGY.DataLayers.csproj" />
+    <ProjectReference Include="..\SGENERGY.DomainModels\SGENERGY.DomainModels.csproj" />
+  </ItemGroup>
+
+</Project>

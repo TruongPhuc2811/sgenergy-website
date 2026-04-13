@@ -1,0 +1,38 @@
+using SGENERGY.BusinessLayers;
+using SGENERGY.BusinessLayers.Services;
+using SGENERGY.DataLayers;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Missing connection string 'DefaultConnection'.");
+                    
+// Initialize Business layer configuration (used by existing Dapper repositories)
+Configuration.Initialize(connectionString);
+
+// Register Dapper-based repositories/services  
+builder.Services.AddSingleton<IMediaRepository>(_ => new MediaRepository(connectionString));
+builder.Services.AddScoped<MediaService>();
+builder.Services.AddScoped<LocalMediaStorage>();
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();

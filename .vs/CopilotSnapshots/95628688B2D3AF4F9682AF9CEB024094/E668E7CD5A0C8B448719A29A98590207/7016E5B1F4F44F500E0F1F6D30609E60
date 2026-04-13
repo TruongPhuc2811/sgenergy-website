@@ -1,0 +1,175 @@
+﻿using Microsoft.EntityFrameworkCore;
+using SGENERGY.DomainModels.Entities;
+
+namespace SGENERGY.DataLayers;
+
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    public DbSet<Media> Media => Set<Media>();
+    public DbSet<Service> Services => Set<Service>();
+    public DbSet<Products> Products => Set<Products>();
+    public DbSet<Project> Projects => Set<Project>();
+    public DbSet<News> News => Set<News>();
+    public DbSet<HomeSlide> HomeSlides => Set<HomeSlide>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Media>(e =>
+        {
+            e.Property(x => x.FilePath).HasMaxLength(500).IsRequired();
+            e.Property(x => x.FileName).HasMaxLength(255);
+            e.Property(x => x.ContentType).HasMaxLength(100);
+            e.Property(x => x.AltText).HasMaxLength(255);
+            e.Property(x => x.Title).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Service>(e =>
+        {
+            e.Property(x => x.Title).HasMaxLength(200).IsRequired();
+            e.Property(x => x.Slug).HasMaxLength(220).IsRequired();
+            e.Property(x => x.Summary).HasMaxLength(500);
+            e.HasIndex(x => x.Slug).IsUnique();
+
+            e.HasOne(x => x.CoverMedia)
+                .WithMany()
+                .HasForeignKey(x => x.CoverMediaId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<Products>(e =>
+        {
+            e.Property(x => x.Name).HasMaxLength(200).IsRequired();
+            e.Property(x => x.Slug).HasMaxLength(220).IsRequired();
+            e.Property(x => x.Summary).HasMaxLength(500);
+            e.Property(x => x.Currency).HasMaxLength(10).IsRequired();
+
+            e.Property(x => x.Price).HasColumnType("decimal(18,2)");
+            e.Property(x => x.SalePrice).HasColumnType("decimal(18,2)");
+
+            e.Property(x => x.SKU).HasMaxLength(100);
+            e.Property(x => x.Brand).HasMaxLength(120);
+
+            e.HasIndex(x => x.Slug).IsUnique();
+
+            e.HasOne(x => x.CoverMedia)
+                .WithMany()
+                .HasForeignKey(x => x.CoverMediaId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<Project>(e =>
+        {
+            e.Property(x => x.Title).HasMaxLength(220).IsRequired();
+            e.Property(x => x.Slug).HasMaxLength(240).IsRequired();
+            e.Property(x => x.Summary).HasMaxLength(600);
+
+            e.Property(x => x.Location).HasMaxLength(200);
+            e.Property(x => x.CustomerName).HasMaxLength(200);
+            e.Property(x => x.Capacity).HasMaxLength(100);
+
+            e.HasIndex(x => x.Slug).IsUnique();
+
+            e.HasOne(x => x.CoverMedia)
+                .WithMany()
+                .HasForeignKey(x => x.CoverMediaId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<News>(e =>
+        {
+            e.Property(x => x.Title).HasMaxLength(220).IsRequired();
+            e.Property(x => x.Slug).HasMaxLength(240).IsRequired();
+            e.Property(x => x.Summary).HasMaxLength(700);
+            e.HasIndex(x => x.Slug).IsUnique();
+
+            e.HasOne(x => x.CoverMedia)
+                .WithMany()
+                .HasForeignKey(x => x.CoverMediaId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<HomeSlide>(e =>
+        {
+            e.Property(x => x.Title).HasMaxLength(200);
+            e.Property(x => x.Subtitle).HasMaxLength(500);
+            e.Property(x => x.ButtonText).HasMaxLength(80);
+            e.Property(x => x.ButtonUrl).HasMaxLength(300);
+
+            e.HasOne(x => x.BackgroundMedia)
+                .WithMany()
+                .HasForeignKey(x => x.BackgroundMediaId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        // ===================== SEED DATA (tối thiểu để test Home) =====================
+        var seedCreatedAt = new DateTime(2026, 03, 03, 0, 0, 0, DateTimeKind.Utc);
+
+        // Media seed (dùng ảnh có sẵn trong wwwroot của Website/Admin hoặc bạn thay bằng ảnh thật sau)
+        modelBuilder.Entity<Media>().HasData(
+            new Media { Id = 1, FilePath = "/images/seed/slide1.jpg", FileName = "slide1.jpg", ContentType = "image/jpeg", SizeBytes = 0, AltText = "Slide 1", Title = "Slide 1", CreatedAt = seedCreatedAt },
+            new Media { Id = 2, FilePath = "/images/seed/slide2.jpg", FileName = "slide2.jpg", ContentType = "image/jpeg", SizeBytes = 0, AltText = "Slide 2", Title = "Slide 2", CreatedAt = seedCreatedAt }
+        );
+
+        modelBuilder.Entity<HomeSlide>().HasData(
+            new HomeSlide
+            {
+                Id = 1,
+                Title = "GIẢI PHÁP TIẾT KIỆM NĂNG LƯỢNG",
+                Subtitle = "Kiểm toán năng lượng – Tư vấn giải pháp tối ưu",
+                ButtonText = "Xem dự án",
+                ButtonUrl = "/du-an",
+                BackgroundMediaId = 1,
+                SortOrder = 1,
+                IsActive = true,
+                CreatedAt = seedCreatedAt
+            },
+            new HomeSlide
+            {
+                Id = 2,
+                Title = "GIẢI PHÁP NĂNG LƯỢNG XANH",
+                Subtitle = "Giải pháp năng lượng tái tạo cho nhà máy và hộ gia đình",
+                ButtonText = "Xem giải pháp",
+                ButtonUrl = "/dich-vu",
+                BackgroundMediaId = 2,
+                SortOrder = 2,
+                IsActive = true,
+                CreatedAt = seedCreatedAt
+            }
+        );
+
+        modelBuilder.Entity<Service>().HasData(
+            new Service
+            {
+                Id = 1,
+                Title = "Điện mặt trời áp mái",
+                Slug = "dien-mat-troi-ap-mai",
+                Summary = "Tư vấn, thiết kế, thi công hệ thống điện mặt trời áp mái.",
+                ContentHtml = "<p>Nội dung chi tiết dịch vụ điện mặt trời áp mái.</p>",
+                IsPublished = true,
+                IsFeatured = true,
+                SortOrder = 1,
+                CoverMediaId = null,
+                CreatedAt = seedCreatedAt
+            }
+        );
+
+        modelBuilder.Entity<News>().HasData(
+            new News
+            {
+                Id = 1,
+                Title = "Xu hướng năng lượng tái tạo năm 2026",
+                Slug = "xu-huong-nang-luong-tai-tao-2026",
+                Summary = "Tổng quan xu hướng và cơ hội đầu tư năng lượng tái tạo tại Việt Nam.",
+                ContentHtml = "<p>Nội dung bài viết tin tức mẫu.</p>",
+                PublishedAt = seedCreatedAt,
+                IsPublished = true,
+                CoverMediaId = null,
+                CreatedAt = seedCreatedAt
+            }
+        );
+    }
+}

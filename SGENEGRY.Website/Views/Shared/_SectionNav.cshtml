@@ -1,0 +1,18 @@
+﻿@model IReadOnlyList<SGENERGY.Website.Models.SectionNavItemVm>
+
+@if (Model != null && Model.Count > 0)
+{
+    <nav class="section-nav js-section-nav" aria-label="Section navigation">
+        <div class="container section-nav__inner">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+                <a class="section-nav__link @(i == 0 ? "is-active" : "")"
+                   href="#@item.TargetId"
+                   data-target="@item.TargetId">
+                    @item.Text
+                </a>
+            }
+        </div>
+    </nav>
+}

@@ -1,0 +1,465 @@
+﻿@using SGENERGY.Website.Models
+@{
+    ViewData["Title"] = "Liên hệ";
+}
+
+@await Html.PartialAsync("_PageHero", new PageHeroVm {
+Title = "LIÊN HỆ",
+    BreadcrumbText = "Liên hệ",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2000&q=70"
+})
+
+<section class="contact-page">
+    <div class="container contact-page__container">
+
+        <div class="contact-intro" data-aos="fade-up">
+            <span class="section-badge">Liên hệ với chúng tôi</span>
+            <h2 class="section-title">Sẵn sàng hỗ trợ bạn 24/7</h2>
+            <p class="section-description">Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng tư vấn và hỗ trợ bạn tìm ra giải pháp năng lượng tối ưu nhất</p>
+        </div>
+
+        <div class="contact-card">
+
+            <!-- LEFT: Quote UI (dùng quote.js) -->
+            <div class="contact-card__left" data-aos="fade-right">
+
+                <header class="quote-head">
+                    <div class="quote-head__icon">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div class="quote-head__kicker">TÍNH TOÁN ĐỂ LỰA CHỌN GIẢI PHÁP PHÙ HỢP NHẤT</div>
+                    <h1 class="quote-head__title">TÍNH TOÁN CHI PHÍ<br/><span class="highlight">TIẾT KIỆM</span></h1>
+                    <p class="quote-head__desc">Nhận tư vấn miễn phí về hệ thống phù hợp với nhu cầu của bạn</p>
+                </header>
+
+                <form class="quote-card js-quote-form" id="quoteForm" novalidate>
+                    <!-- LEFT: Dự toán hệ thống -->
+                    <div class="quote-card__col quote-card__col--left">
+                        <div class="quote-section-header">
+                            <div class="quote-section-icon">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div class="quote-section-text">
+                                <h2 class="quote-card__h2">Dự toán hệ thống</h2>
+                                <p class="quote-card__p">Nhận kết quả hệ thống Điện Mặt Trời phù hợp với nhu cầu sử dụng của gia đình bạn.</p>
+                            </div>
+                        </div>
+
+                        <div class="qform">
+                            <div class="qrow">
+                                <label class="qrow__label" for="roofArea">
+                                    Diện tích mái nhà
+                                    <span class="qrow__hint">Tối thiểu 16m2</span>
+                                </label>
+
+                                <div class="qrow__control">
+                                    <input class="qrange js-range"
+                                           id="roofArea" name="roofArea"
+                                           type="range" min="16" max="300" value="16" step="1"
+                                           data-unit="m²" data-format="number" />
+
+                                    <div class="qrow__value">
+                                        <span class="js-range-out" data-for="roofArea">16</span> m²
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="qrow">
+                                <label class="qrow__label" for="monthlyBill">
+                                    Hóa đơn tiền điện
+                                    <span class="qrow__hint">Trung bình tháng</span>
+                                </label>
+
+                                <div class="qrow__control">
+                                    <input class="qrange js-range"
+                                           id="monthlyBill" name="monthlyBill"
+                                           type="range" min="0" max="10000000" value="0" step="50000"
+                                           data-unit="VND" data-format="vnd" />
+
+                                    <div class="qrow__value">
+                                        <span class="js-range-out" data-for="monthlyBill">0</span> VND
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="qrow">
+                                <label class="qrow__label" for="region">Khu vực sống</label>
+                                <div class="qrow__control">
+                                    <select class="qselect" id="region" name="region">
+                                        <option value="" selected>Chọn tỉnh thành</option>
+
+                                        <optgroup label="ĐỒNG BẰNG SÔNG HỒNG">
+                                            <option value="Hà Nội">Hà Nội</option>
+                                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                            <option value="Bắc Ninh">Bắc Ninh</option>
+                                            <option value="Quảng Ninh">Quảng Ninh</option>
+                                            <option value="Hải Dương">Hải Dương</option>
+                                            <option value="Hải Phòng">Hải Phòng</option>
+                                            <option value="Hưng Yên">Hưng Yên</option>
+                                            <option value="Thái Bình">Thái Bình</option>
+                                            <option value="Hà Nam">Hà Nam</option>
+                                            <option value="Nam Định">Nam Định</option>
+                                            <option value="Ninh Bình">Ninh Bình</option>
+                                        </optgroup>
+
+                                        <optgroup label="TRUNG DU VÀ MIỀN NÚI PHÍA BẮC">
+                                            <option value="Hà Giang">Hà Giang</option>
+                                            <option value="Cao Bằng">Cao Bằng</option>
+                                            <option value="Bắc Kạn">Bắc Kạn</option>
+                                            <option value="Tuyên Quang">Tuyên Quang</option>
+                                            <option value="Lào Cai">Lào Cai</option>
+                                            <option value="Yên Bái">Yên Bái</option>
+                                            <option value="Thái Nguyên">Thái Nguyên</option>
+                                            <option value="Lạng Sơn">Lạng Sơn</option>
+                                            <option value="Bắc Giang">Bắc Giang</option>
+                                            <option value="Phú Thọ">Phú Thọ</option>
+                                            <option value="Điện Biên">Điện Biên</option>
+                                            <option value="Lai Châu">Lai Châu</option>
+                                            <option value="Sơn La">Sơn La</option>
+                                            <option value="Hoà Bình">Hoà Bình</option>
+                                        </optgroup>
+
+                                        <optgroup label="BẮC TRUNG BỘ VÀ DUYÊN HẢI MIỀN TRUNG">
+                                            <option value="Thanh Hoá">Thanh Hoá</option>
+                                            <option value="Nghệ An">Nghệ An</option>
+                                            <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                            <option value="Quảng Bình">Quảng Bình</option>
+                                            <option value="Quảng Trị">Quảng Trị</option>
+                                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                            <option value="Đà Nẵng">Đà Nẵng</option>
+                                            <option value="Quảng Nam">Quảng Nam</option>
+                                            <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                            <option value="Bình Định">Bình Định</option>
+                                            <option value="Phú Yên">Phú Yên</option>
+                                            <option value="Khánh Hoà">Khánh Hoà</option>
+                                            <option value="Ninh Thuận">Ninh Thuận</option>
+                                            <option value="Bình Thuận">Bình Thuận</option>
+                                        </optgroup>
+
+                                        <optgroup label="TÂY NGUYÊN">
+                                            <option value="Kon Tum">Kon Tum</option>
+                                            <option value="Gia Lai">Gia Lai</option>
+                                            <option value="Đắk Lắk">Đắk Lắk</option>
+                                            <option value="Đắk Nông">Đắk Nông</option>
+                                            <option value="Lâm Đồng">Lâm Đồng</option>
+                                        </optgroup>
+
+                                        <optgroup label="ĐÔNG NAM BỘ">
+                                            <option value="Bình Phước">Bình Phước</option>
+                                            <option value="Tây Ninh">Tây Ninh</option>
+                                            <option value="Bình Dương">Bình Dương</option>
+                                            <option value="Đồng Nai">Đồng Nai</option>
+                                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                        </optgroup>
+
+                                        <optgroup label="ĐỒNG BẰNG SÔNG CỬU LONG">
+                                            <option value="Long An">Long An</option>
+                                            <option value="Tiền Giang">Tiền Giang</option>
+                                            <option value="Bến Tre">Bến Tre</option>
+                                            <option value="Trà Vinh">Trà Vinh</option>
+                                            <option value="Vĩnh Long">Vĩnh Long</option>
+                                            <option value="Đồng Tháp">Đồng Tháp</option>
+                                            <option value="An Giang">An Giang</option>
+                                            <option value="Kiên Giang">Kiên Giang</option>
+                                            <option value="Cần Thơ">Cần Thơ</option>
+                                            <option value="Hậu Giang">Hậu Giang</option>
+                                            <option value="Sóc Trăng">Sóc Trăng</option>
+                                            <option value="Bạc Liêu">Bạc Liêu</option>
+                                            <option value="Cà Mau">Cà Mau</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="qrow">
+                                <label class="qrow__label" for="dayPercent">Tỷ lệ sử dụng điện ban ngày</label>
+
+                                <div class="qrow__control">
+                                    <input class="qrange js-range"
+                                           id="dayPercent" name="dayPercent"
+                                           type="range" min="0" max="100" value="0" step="1"
+                                           data-unit="%" data-format="number" />
+
+                                    <div class="qrow__value">
+                                        <span class="js-range-out" data-for="dayPercent">0</span> %
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Nhận báo giá -->
+                    <div class="quote-card__col quote-card__col--right">
+                        <div class="quote-section-header">
+                            <div class="quote-section-icon">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="quote-section-text">
+                                <h2 class="quote-card__h2">Nhận báo giá</h2>
+                                <p class="quote-card__p">Nhận kết quả số tiền sinh lời &amp; hệ thống Điện Mặt Trời phù hợp cho nhu cầu của bạn.</p>
+                            </div>
+                        </div>
+
+                        <div class="qlead">
+                            <div class="qinput">
+                                <span class="qinput__icon"><i class="fa-regular fa-user"></i></span>
+                                <input class="qinput__field"
+                                       id="fullName" name="fullName"
+                                       type="text" placeholder="Họ tên*"
+                                       required minlength="2" maxlength="100" />
+                            </div>
+                            <div class="qerror" data-error-for="fullName"></div>
+
+                            <div class="qinput">
+                                <span class="qinput__icon"><i class="fa-regular fa-envelope"></i></span>
+                                <input class="qinput__field"
+                                       id="email" name="email"
+                                       type="email" placeholder="Email*"
+                                       required />
+                            </div>
+                            <div class="qerror" data-error-for="email"></div>
+
+                            <div class="qinput">
+                                <span class="qinput__icon"><i class="fa-solid fa-phone"></i></span>
+                                <input class="qinput__field"
+                                       id="phone" name="phone"
+                                       type="tel" placeholder="Số điện thoại*"
+                                       required inputmode="tel" />
+                            </div>
+                            <div class="qerror" data-error-for="phone"></div>
+
+                            <div class="qinput">
+                                <span class="qinput__icon"><i class="fa-solid fa-location-dot"></i></span>
+                                <select class="qinput__field" id="city" name="city" required>
+                                    <option value="" selected>Tỉnh/thành phố*</option>
+
+                                    <optgroup label="ĐỒNG BẰNG SÔNG HỒNG">
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                        <option value="Bắc Ninh">Bắc Ninh</option>
+                                        <option value="Quảng Ninh">Quảng Ninh</option>
+                                        <option value="Hải Dương">Hải Dương</option>
+                                        <option value="Hải Phòng">Hải Phòng</option>
+                                        <option value="Hưng Yên">Hưng Yên</option>
+                                        <option value="Thái Bình">Thái Bình</option>
+                                        <option value="Hà Nam">Hà Nam</option>
+                                        <option value="Nam Định">Nam Định</option>
+                                        <option value="Ninh Bình">Ninh Bình</option>
+                                    </optgroup>
+
+                                    <optgroup label="TRUNG DU VÀ MIỀN NÚI PHÍA BẮC">
+                                        <option value="Hà Giang">Hà Giang</option>
+                                        <option value="Cao Bằng">Cao Bằng</option>
+                                        <option value="Bắc Kạn">Bắc Kạn</option>
+                                        <option value="Tuyên Quang">Tuyên Quang</option>
+                                        <option value="Lào Cai">Lào Cai</option>
+                                        <option value="Yên Bái">Yên Bái</option>
+                                        <option value="Thái Nguyên">Thái Nguyên</option>
+                                        <option value="Lạng Sơn">Lạng Sơn</option>
+                                        <option value="Bắc Giang">Bắc Giang</option>
+                                        <option value="Phú Thọ">Phú Thọ</option>
+                                        <option value="Điện Biên">Điện Biên</option>
+                                        <option value="Lai Châu">Lai Châu</option>
+                                        <option value="Sơn La">Sơn La</option>
+                                        <option value="Hoà Bình">Hoà Bình</option>
+                                    </optgroup>
+
+                                    <optgroup label="BẮC TRUNG BỘ VÀ DUYÊN HẢI MIỀN TRUNG">
+                                        <option value="Thanh Hoá">Thanh Hoá</option>
+                                        <option value="Nghệ An">Nghệ An</option>
+                                        <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                        <option value="Quảng Bình">Quảng Bình</option>
+                                        <option value="Quảng Trị">Quảng Trị</option>
+                                        <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                        <option value="Quảng Nam">Quảng Nam</option>
+                                        <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                        <option value="Bình Định">Bình Định</option>
+                                        <option value="Phú Yên">Phú Yên</option>
+                                        <option value="Khánh Hoà">Khánh Hoà</option>
+                                        <option value="Ninh Thuận">Ninh Thuận</option>
+                                        <option value="Bình Thuận">Bình Thuận</option>
+                                    </optgroup>
+
+                                    <optgroup label="TÂY NGUYÊN">
+                                        <option value="Kon Tum">Kon Tum</option>
+                                        <option value="Gia Lai">Gia Lai</option>
+                                        <option value="Đắk Lắk">Đắk Lắk</option>
+                                        <option value="Đắk Nông">Đắk Nông</option>
+                                        <option value="Lâm Đồng">Lâm Đồng</option>
+                                    </optgroup>
+
+                                    <optgroup label="ĐÔNG NAM BỘ">
+                                        <option value="Bình Phước">Bình Phước</option>
+                                        <option value="Tây Ninh">Tây Ninh</option>
+                                        <option value="Bình Dương">Bình Dương</option>
+                                        <option value="Đồng Nai">Đồng Nai</option>
+                                        <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                        <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                    </optgroup>
+
+                                    <optgroup label="ĐỒNG BẰNG SÔNG CỬU LONG">
+                                        <option value="Long An">Long An</option>
+                                        <option value="Tiền Giang">Tiền Giang</option>
+                                        <option value="Bến Tre">Bến Tre</option>
+                                        <option value="Trà Vinh">Trà Vinh</option>
+                                        <option value="Vĩnh Long">Vĩnh Long</option>
+                                        <option value="Đồng Tháp">Đồng Tháp</option>
+                                        <option value="An Giang">An Giang</option>
+                                        <option value="Kiên Giang">Kiên Giang</option>
+                                        <option value="Cần Thơ">Cần Thơ</option>
+                                        <option value="Hậu Giang">Hậu Giang</option>
+                                        <option value="Sóc Trăng">Sóc Trăng</option>
+                                        <option value="Bạc Liêu">Bạc Liêu</option>
+                                        <option value="Cà Mau">Cà Mau</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="qerror" data-error-for="city"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="quote-actions">
+                    <button class="quote-btn js-quote-submit" type="submit" form="quoteForm">
+                        <span class="quote-btn__icon"><i class="fa-solid fa-paper-plane"></i></span>
+                        <span class="quote-btn__text">YÊU CẦU BÁO GIÁ NGAY</span>
+                        <span class="quote-btn__arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                    </button>
+                    <p class="quote-actions__note">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Thông tin của bạn được bảo mật tuyệt đối
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: contact info -->
+            <aside class="contact-card__right" data-aos="fade-left">
+                <div class="contact-info-header">
+                    <h2 class="contact-info__title">Thông tin liên hệ</h2>
+                    <p class="contact-info__subtitle">Kết nối với chúng tôi qua</p>
+                </div>
+
+                <div class="contact-info-list">
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon">
+                            <i class="fa-solid fa-phone-volume"></i>
+                        </div>
+                        <div class="contact-info__content">
+                            <div class="contact-info__label">Hotline</div>
+                            <a class="contact-info__value" href="tel:+84989100986">(+84) 989 100 986</a>
+                            <span class="contact-info__note">Hỗ trợ 24/7</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="contact-info__content">
+                            <div class="contact-info__label">Email</div>
+                            <a class="contact-info__value" href="mailto:SGENERGYGROUP3@gmail.com">SGENERGYGROUP3@gmail.com</a>
+                            <span class="contact-info__note">Phản hồi trong 24h</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div class="contact-info__content">
+                            <div class="contact-info__label">Website</div>
+                            <a class="contact-info__value" href="#" target="_blank" rel="noopener">www.sgenergy.vn</a>
+                            <span class="contact-info__note">Tìm hiểu thêm về chúng tôi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-social">
+                    <h3 class="contact-social__title">Theo dõi chúng tôi</h3>
+                    <div class="contact-social__buttons">
+                        <a class="social-btn social-btn--facebook" href="#" aria-label="Facebook" title="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a class="social-btn social-btn--youtube" href="#" aria-label="Youtube" title="Youtube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a class="social-btn social-btn--linkedin" href="#" aria-label="LinkedIn" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a class="social-btn social-btn--zalo" href="#" aria-label="Zalo" title="Zalo">
+                            <span class="zalo-icon">Z</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-hours">
+                    <div class="contact-hours__icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="contact-hours__content">
+                        <h4>Giờ làm việc</h4>
+                        <p>Thứ 2 - Thứ 6: 8:00 - 18:00</p>
+                        <p>Thứ 7: 8:00 - 12:00</p>
+                        <p class="contact-hours__note">Chủ nhật: Nghỉ</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Bottom: Locations -->
+        <div class="contact-locations" data-aos="fade-up">
+            <div class="locations-header">
+                <h2 class="locations-title">Địa điểm văn phòng</h2>
+                <p class="locations-subtitle">Ghé thăm chúng tôi tại các địa chỉ sau</p>
+            </div>
+            
+            <button class="loc-nav loc-nav--prev" type="button" aria-label="Prev">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="loc-grid">
+                <article class="loc-card is-active">
+                    <div class="loc-card__badge">Trụ sở chính</div>
+                    <div class="loc-card__head">
+                        <div class="loc-card__icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="loc-card__title">CÔNG TY TNHH Dịch vụ và Kỹ thuật Năng lượng SG</div>
+                    </div>
+                    <div class="loc-card__body">
+                        <div class="loc-card__line">
+                            <i class="fa-solid fa-map-marker-alt"></i>
+                            <span>41NH, Đường 14A Tân Thuận, TP. Hồ Chí Minh</span>
+                        </div>
+                        <div class="loc-card__line">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+84989100986">(+84) 989 100 986</a>
+                        </div>
+                        <div class="loc-card__actions">
+                            <a href="#" class="loc-card__btn" target="_blank" rel="noopener">
+                                <i class="fa-solid fa-directions"></i>
+                                <span>Chỉ đường</span>
+                            </a>
+                            <a href="#" class="loc-card__btn loc-card__btn--secondary">
+                                <i class="fa-regular fa-map"></i>
+                                <span>Xem bản đồ</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <button class="loc-nav loc-nav--next" type="button" aria-label="Next">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/quote.js" asp-append-version="true"></script>
+}

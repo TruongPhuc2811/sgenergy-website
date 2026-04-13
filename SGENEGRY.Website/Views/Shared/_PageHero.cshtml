@@ -1,0 +1,18 @@
+﻿@model SGENERGY.Website.Models.PageHeroVm
+
+<section class="page-hero" style="--hero-img:url('@Model.BackgroundImageUrl')">
+    <div class="page-hero__overlay"></div>
+
+    <div class="page-hero__content container">
+        <h1 class="page-hero__title">@Model.Title</h1>
+
+        <div class="page-hero__crumb">
+            <a href="/">Trang chủ</a>
+            @if (!string.IsNullOrWhiteSpace(Model.BreadcrumbText))
+            {
+                <span>/</span>
+                <span>@Model.BreadcrumbText</span>
+            }
+        </div>
+    </div>
+</section>
