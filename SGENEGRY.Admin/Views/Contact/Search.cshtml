@@ -1,0 +1,90 @@
+@model PagedResult<ContactCustomer>
+@{
+    Layout = null;
+}
+<div class="mb-2 text-muted">
+    Danh sách này có <strong>@Model.RowCount</strong> liên hệ
+</div>
+
+<div class="card">
+    <div class="card-body p-1">
+        <table class="table table-bordered table-hover mb-0 align-middle">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Điện thoại / Email</th>
+                    <th>Chủ đề</th>
+                    <th style="width:140px;" class="text-center">Thời gian</th>
+                    <th style="width:120px;" class="text-center">Trạng thái</th>
+                    <th style="width:100px;" class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DataItems)
+                {
+                    <tr class="@(item.IsHandled ? "" : "table-warning")">
+                        <td>
+                            <strong>@item.FullName</strong><br />
+                            <small class="text-muted">@item.CompanyName</small>
+                        </td>
+                        <td>
+                            @item.Phone<br />
+                            <small class="text-muted">@item.Email</small>
+                        </td>
+                        <td>@item.Subject</td>
+                        <td class="text-center">
+                            <small>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                        </td>
+                        <td class="text-center">
+                            @if (item.IsHandled)
+                            {
+                                <span class="badge bg-success">Đã xử lý</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Chưa xử lý</span>
+                            }
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <a href="~/Contact/Detail/@item.ContactID" class="btn btn-sm btn-primary">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a href="~/Contact/Delete/@item.ContactID" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+        <ul class="pagination justify-content-center mb-0">
+            @foreach (var p in Model.GetDisplayPages())
+            {
+                if (p.IsCurrent)
+                {
+                    <li class="page-item active">
+                        <a class="page-link">@p.Page</a>
+                    </li>
+                }
+                else if (p.IsEllipsis)
+                {
+                    <li class="page-item">
+                        <a class="page-link">...</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:;"
+                           onclick="paginationSearch(event, document.getElementById('formSearch'), @p.Page)">
+                            @p.Page
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

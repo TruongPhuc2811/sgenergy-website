@@ -1,6 +1,4 @@
 using SGENERGY.BusinessLayers;
-using SGENERGY.BusinessLayers.Services;
-using SGENERGY.DataLayers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +9,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
                     
 // Initialize Business layer configuration (used by existing Dapper repositories)
 Configuration.Initialize(connectionString);
-
-// Register Dapper-based repositories/services  
-builder.Services.AddSingleton<IMediaRepository>(_ => new MediaRepository(connectionString));
-builder.Services.AddScoped<MediaService>();
-builder.Services.AddScoped<LocalMediaStorage>();
 
 var app = builder.Build();
 

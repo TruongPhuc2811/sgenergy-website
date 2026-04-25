@@ -1,0 +1,100 @@
+@model ContactCustomer
+@{
+    ViewBag.Title = "Chi tiết liên hệ";
+}
+
+@section PageToolBar {
+    @if (!Model.IsHandled)
+    {
+        <form method="post" action="~/Contact/MarkHandled/@Model.ContactID" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle me-1"></i>
+                Đánh dấu đã xử lý
+            </button>
+        </form>
+    }
+    <a href="~/Contact/Delete/@Model.ContactID" class="btn btn-danger ms-1">
+        <i class="bi bi-trash me-1"></i>
+        Xóa
+    </a>
+    <a href="~/Contact" class="btn btn-secondary ms-1">
+        <i class="bi bi-arrow-left"></i>
+        Quay lại
+    </a>
+}
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-envelope me-2"></i>
+                    Thông tin liên hệ
+                    @if (Model.IsHandled)
+                    {
+                        <span class="badge bg-success ms-2">Đã xử lý</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark ms-2">Chưa xử lý</span>
+                    }
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Họ tên</dt>
+                    <dd class="col-sm-9">@Model.FullName</dd>
+
+                    <dt class="col-sm-3">Điện thoại</dt>
+                    <dd class="col-sm-9">@Model.Phone</dd>
+
+                    <dt class="col-sm-3">Email</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3">Công ty</dt>
+                    <dd class="col-sm-9">@Model.CompanyName</dd>
+
+                    <dt class="col-sm-3">Địa chỉ</dt>
+                    <dd class="col-sm-9">@Model.Address</dd>
+
+                    <dt class="col-sm-3">Chủ đề</dt>
+                    <dd class="col-sm-9">@Model.Subject</dd>
+
+                    <dt class="col-sm-3">Nội dung</dt>
+                    <dd class="col-sm-9">
+                        <p class="bg-light p-3 rounded">@Model.Message</p>
+                    </dd>
+
+                    @if (Model.ProductID.HasValue)
+                    {
+                        <dt class="col-sm-3">Mã sản phẩm</dt>
+                        <dd class="col-sm-9">#@Model.ProductID</dd>
+                    }
+
+                    @if (Model.ProjectID.HasValue)
+                    {
+                        <dt class="col-sm-3">Mã dự án</dt>
+                        <dd class="col-sm-9">#@Model.ProjectID</dd>
+                    }
+
+                    <dt class="col-sm-3">Trang nguồn</dt>
+                    <dd class="col-sm-9"><small class="text-muted">@Model.SourcePage</small></dd>
+
+                    <dt class="col-sm-3">Thời gian gửi</dt>
+                    <dd class="col-sm-9">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+
+                    @if (Model.IsHandled)
+                    {
+                        <dt class="col-sm-3">Người xử lý</dt>
+                        <dd class="col-sm-9">@Model.HandledBy</dd>
+
+                        <dt class="col-sm-3">Thời điểm xử lý</dt>
+                        <dd class="col-sm-9">@Model.HandledAt?.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

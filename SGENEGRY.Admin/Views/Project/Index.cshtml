@@ -1,0 +1,52 @@
+@model ProjectSearchInput
+@{
+    ViewBag.Title = "Quản lý Dự án";
+}
+@section PageToolBar {
+    <a href="~/Project/Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i>
+        Bổ sung
+    </a>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form id="formSearch" method="get"
+              action="~/Project/Search"
+              data-target="searchResult"
+              onsubmit="paginationSearch(event, this, 1)">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select" asp-for="IsActive">
+                        <option value="">-- Tất cả --</option>
+                        <option value="true">Đang hoạt động</option>
+                        <option value="false">Tạm dừng</option>
+                    </select>
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label">Tên dự án</label>
+                    <div class="input-group">
+                        <input type="hidden" asp-for="PageSize" />
+                        <input type="text"
+                               class="form-control"
+                               asp-for="SearchValue"
+                               placeholder="Tên dự án..." autofocus />
+                        <button class="btn btn-info d-flex align-items-center">
+                            <i class="bi bi-search me-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="searchResult"></div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            paginationSearch(null, document.getElementById("formSearch"), @Model.Page);
+        });
+    </script>
+}

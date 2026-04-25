@@ -1,0 +1,95 @@
+@model PagedResult<Project>
+@{
+    Layout = null;
+}
+<div class="mb-2 text-muted">
+    Danh sách này có <strong>@Model.RowCount</strong> dự án
+</div>
+
+<div class="card">
+    <div class="card-body p-1">
+        <table class="table table-bordered table-hover mb-0 align-middle">
+            <thead class="table-secondary">
+                <tr>
+                    <th style="width:100px;">Ảnh</th>
+                    <th>Dự án</th>
+                    <th>Địa điểm</th>
+                    <th style="width:120px;" class="text-center">Trạng thái</th>
+                    <th style="width:100px;" class="text-center">Nổi bật</th>
+                    <th style="width:100px;" class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DataItems)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <img src="~/images/projects/@(string.IsNullOrEmpty(item.Thumbnail) ? "nophoto.png" : item.Thumbnail)"
+                                 class="img-thumbnail"
+                                 style="max-height:70px;"
+                                 alt="Ảnh dự án" />
+                        </td>
+                        <td>
+                            <strong>@item.ProjectName</strong><br />
+                            <small class="text-muted">@item.Summary</small>
+                        </td>
+                        <td>@item.Location</td>
+                        <td class="text-center">
+                            @if (item.IsActive)
+                            {
+                                <span class="badge bg-success">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">Tạm dừng</span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            @if (item.IsFeatured)
+                            {
+                                <i class="bi bi-star-fill text-warning"></i>
+                            }
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <a href="~/Project/Edit/@item.ProjectID" class="btn btn-sm btn-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="~/Project/Delete/@item.ProjectID" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+        <ul class="pagination justify-content-center mb-0">
+            @foreach (var p in Model.GetDisplayPages())
+            {
+                if (p.IsCurrent)
+                {
+                    <li class="page-item active">
+                        <a class="page-link">@p.Page</a>
+                    </li>
+                }
+                else if (p.IsEllipsis)
+                {
+                    <li class="page-item">
+                        <a class="page-link">...</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:;"
+                           onclick="paginationSearch(event, document.getElementById('formSearch'), @p.Page)">
+                            @p.Page
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
