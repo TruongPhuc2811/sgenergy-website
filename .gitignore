@@ -1,0 +1,12 @@
+# Build artifacts
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+.vs/
+
+# IDE folders
+.idea/
+*.swp

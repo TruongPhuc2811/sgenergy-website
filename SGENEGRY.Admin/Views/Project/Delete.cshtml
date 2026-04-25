@@ -1,0 +1,90 @@
+@model Project
+@{
+    ViewBag.Title = "Xóa dự án";
+}
+
+@section PageToolBar {
+    @if (ViewBag.AllowDelete)
+    {
+        <button type="submit" form="formDelete" class="btn btn-danger">
+            <i class="bi bi-trash me-1"></i>
+            Xóa
+        </button>
+    }
+    <a href="~/Project" class="btn btn-secondary ms-1">
+        <i class="bi bi-arrow-left"></i>
+        Quay lại
+    </a>
+}
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card card-danger card-outline">
+            <div class="card-header">
+                <h5 class="card-title mb-0 text-danger">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Xác nhận xóa dự án
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <form id="formDelete" method="post" action="~/Project/Delete/@Model.ProjectID">
+                    @if (ViewBag.AllowDelete)
+                    {
+                        <div class="alert alert-warning d-flex align-items-center">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Bạn có chắc chắn muốn xóa dự án sau không? Toàn bộ ảnh của dự án cũng sẽ bị xóa.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning d-flex align-items-center">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Dự án này không thể xóa vì đang có liên hệ khách hàng liên quan.
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4">Tên dự án</dt>
+                                <dd class="col-sm-8">@Model.ProjectName</dd>
+
+                                <dt class="col-sm-4">Địa điểm</dt>
+                                <dd class="col-sm-8">@Model.Location</dd>
+
+                                <dt class="col-sm-4">Chủ đầu tư</dt>
+                                <dd class="col-sm-8">@Model.Investor</dd>
+
+                                <dt class="col-sm-4">Quy mô</dt>
+                                <dd class="col-sm-8">@Model.ScaleDescription</dd>
+
+                                <dt class="col-sm-4">Trạng thái</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.IsActive)
+                                    {
+                                        <span class="badge bg-success">Đang hoạt động</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Tạm dừng</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-4">Tóm tắt</dt>
+                                <dd class="col-sm-8">@Model.Summary</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4 text-end">
+                            <img src="~/images/projects/@(string.IsNullOrEmpty(Model.Thumbnail) ? "nophoto.png" : Model.Thumbnail)"
+                                 class="img-fluid img-thumbnail"
+                                 alt="Ảnh dự án"
+                                 style="max-height:220px;" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

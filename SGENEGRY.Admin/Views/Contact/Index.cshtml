@@ -1,0 +1,46 @@
+@model ContactSearchInput
+@{
+    ViewBag.Title = "Quản lý Liên hệ khách hàng";
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form id="formSearch" method="get"
+              action="~/Contact/Search"
+              data-target="searchResult"
+              onsubmit="paginationSearch(event, this, 1)">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <label class="form-label">Trạng thái xử lý</label>
+                    <select class="form-select" asp-for="IsHandled">
+                        <option value="">-- Tất cả --</option>
+                        <option value="false">Chưa xử lý</option>
+                        <option value="true">Đã xử lý</option>
+                    </select>
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label">Tên / Điện thoại / Email</label>
+                    <div class="input-group">
+                        <input type="hidden" asp-for="PageSize" />
+                        <input type="text"
+                               class="form-control"
+                               asp-for="SearchValue"
+                               placeholder="Tên, điện thoại hoặc email..." autofocus />
+                        <button class="btn btn-info d-flex align-items-center">
+                            <i class="bi bi-search me-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="searchResult"></div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            paginationSearch(null, document.getElementById("formSearch"), @Model.Page);
+        });
+    </script>
+}
