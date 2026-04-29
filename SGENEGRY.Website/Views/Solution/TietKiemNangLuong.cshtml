@@ -1,0 +1,273 @@
+@{
+    ViewData["Title"] = "Giải pháp tiết kiệm năng lượng";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "GIẢI PHÁP TIẾT KIỆM NĂNG LƯỢNG",
+    BreadcrumbText = "Giải pháp / Tiết kiệm năng lượng",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Lợi ích</a>
+        <a class="section-nav__link" href="#quy-trinh">Quy trình</a>
+        <a class="section-nav__link" href="#pham-vi">Hạng mục</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Hiệu quả năng lượng</span>
+                <h2 class="solutions-intro__title">Dùng ít điện hơn,<br/><span class="highlight">sản xuất hiệu quả hơn</span></h2>
+                <p class="solutions-intro__text">
+                    Tiết kiệm năng lượng không chỉ là giảm hóa đơn tiền điện – đó là nâng cao hiệu suất tổng thể
+                    của doanh nghiệp. SG Energy cung cấp dịch vụ kiểm toán năng lượng toàn diện và đề xuất các
+                    giải pháp cải thiện với ROI rõ ràng.
+                </p>
+                <p class="solutions-intro__text">
+                    Từ nâng cấp hệ thống chiếu sáng LED, tối ưu điều hòa không khí, điều khiển động cơ biến tần đến
+                    tự động hóa quản lý năng lượng – chúng tôi giúp doanh nghiệp giảm 20–40% tiêu thụ điện năng.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Tiết kiệm 20–40% điện năng</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Kiểm toán năng lượng ISO 50001</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Hoàn vốn: 1–4 năm</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Giám sát thông minh 24/7</span></div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận tư vấn miễn phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lợi ích -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">LỢI ÍCH ĐA CHIỀU</span>
+                <h2 class="section-head__title">Tiết kiệm điện ngay,<br/>lợi ích lâu dài</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-piggy-bank"></i></div>
+                    <div class="benefit__title">GIẢM MẠNH CHI PHÍ ĐIỆN</div>
+                    <div class="benefit__desc">Tiết kiệm 20–40% tiêu thụ điện, cải thiện ngay biên lợi nhuận hoạt động.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-gauge-high"></i></div>
+                    <div class="benefit__title">TĂNG NĂNG SUẤT</div>
+                    <div class="benefit__desc">Hệ thống chiếu sáng, điều hòa, thiết bị tối ưu giúp môi trường làm việc tốt hơn, năng suất cao hơn.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-desktop"></i></div>
+                    <div class="benefit__title">QUẢN LÝ THÔNG MINH</div>
+                    <div class="benefit__desc">Dashboard theo dõi tiêu thụ điện theo từng khu vực, phát hiện lãng phí và tối ưu vận hành.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="benefit__title">TUÂN THỦ LUẬT NĂNG LƯỢNG</div>
+                    <div class="benefit__desc">Đáp ứng Luật Sử dụng năng lượng tiết kiệm và hiệu quả, tránh rủi ro pháp lý cho doanh nghiệp.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-earth-asia"></i></div>
+                    <div class="benefit__title">GIẢM KHÍ THẢI CO₂</div>
+                    <div class="benefit__desc">Giảm tiêu thụ điện đồng nghĩa giảm phát thải khí nhà kính, đóng góp vào mục tiêu Net Zero.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quy trình -->
+    <section class="solutions-process" id="quy-trinh">
+        <div class="container">
+            <header class="section-head section-head--center" data-aos="fade-up">
+                <span class="section-head__kicker">QUY TRÌNH KIỂM TOÁN & TRIỂN KHAI</span>
+                <h2 class="section-head__title">Từ dữ liệu đến tiết kiệm<br/>thực sự</h2>
+            </header>
+            <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step is-active">
+                    <div class="process-step__diamond"><i class="fa-solid fa-chart-column"></i></div>
+                    <div class="process-step__text">Thu thập dữ liệu<br/>tiêu thụ điện</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div class="process-step__text">Kiểm toán năng lượng<br/>chi tiết</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-lightbulb"></i></div>
+                    <div class="process-step__text">Đề xuất giải pháp<br/>tiết kiệm & ROI</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-pen-to-square"></i></div>
+                    <div class="process-step__text">Phê duyệt & lập<br/>kế hoạch triển khai</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="process-step__text">Thi công, nâng cấp<br/>thiết bị & hệ thống</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="process-step__text">Theo dõi & xác nhận<br/>kết quả tiết kiệm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hạng mục -->
+    <section class="solutions-packages" id="pham-vi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">HẠNG MỤC TIẾT KIỆM</span>
+                <h2 class="section-head__title">Giải pháp cho<br/>từng hệ thống năng lượng</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3 class="package-card__title">Hệ thống chiếu sáng LED</h3>
+                    <p class="package-card__desc">Thay thế đèn huỳnh quang, halogen bằng LED tiết kiệm 50–70% năng lượng chiếu sáng.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Đèn LED công nghiệp, văn phòng</li>
+                        <li><i class="fa-solid fa-check"></i> Cảm biến chuyển động, hẹn giờ</li>
+                        <li><i class="fa-solid fa-check"></i> Điều khiển thông minh DALI</li>
+                        <li><i class="fa-solid fa-check"></i> Hoàn vốn trong 1–2 năm</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Hiệu quả cao</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-snowflake"></i></div>
+                    <h3 class="package-card__title">Điều hòa & HVAC thông minh</h3>
+                    <p class="package-card__desc">Tối ưu vận hành hệ thống điều hòa, giảm 30–40% điện năng tiêu thụ.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Biến tần (VFD) cho máy nén</li>
+                        <li><i class="fa-solid fa-check"></i> BMS tự động điều chỉnh nhiệt độ</li>
+                        <li><i class="fa-solid fa-check"></i> Thu hồi nhiệt thải</li>
+                        <li><i class="fa-solid fa-check"></i> Lịch vận hành thông minh</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-gears"></i></div>
+                    <h3 class="package-card__title">Động cơ & biến tần VFD</h3>
+                    <p class="package-card__desc">Lắp biến tần cho bơm, quạt, băng tải – tiết kiệm 30–50% điện năng.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Thay thế động cơ hiệu suất IE2/IE3</li>
+                        <li><i class="fa-solid fa-check"></i> Biến tần (VFD) điều tốc</li>
+                        <li><i class="fa-solid fa-check"></i> Tụ bù cosφ nâng hệ số công suất</li>
+                        <li><i class="fa-solid fa-check"></i> Hoàn vốn 1–3 năm</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG THỰC TẾ</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Tòa nhà thương mại</div>
+                    <div class="reason-card__desc">Nâng cấp chiếu sáng LED và BMS cho hệ thống điều hòa giúp tiết kiệm 35% điện năng toàn tòa nhà.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Nhà máy sản xuất</div>
+                    <div class="reason-card__desc">Lắp biến tần cho hệ thống bơm, quạt công nghiệp giảm 40% tiêu thụ điện của các thiết bị phụ trợ.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Khách sạn, resort</div>
+                    <div class="reason-card__desc">Kết hợp điện mặt trời + tiết kiệm năng lượng + BMS thông minh giảm đến 50% chi phí điện toàn dự án.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp về<br/>tiết kiệm năng lượng</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Kiểm toán năng lượng là gì và có bắt buộc không?</summary>
+                    <div class="sol-faq__a">
+                        Kiểm toán năng lượng là đánh giá toàn diện tiêu thụ điện, xác định cơ hội tiết kiệm. Theo Luật Sử dụng năng lượng tiết kiệm, doanh nghiệp tiêu thụ trên 1.000 TOE/năm bắt buộc phải kiểm toán định kỳ.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Thời gian thực hiện kiểm toán năng lượng mất bao lâu?</summary>
+                    <div class="sol-faq__a">
+                        Kiểm toán sơ bộ (walk-through audit) mất 1–2 ngày. Kiểm toán chi tiết (detailed audit) cho nhà máy lớn có thể mất 2–4 tuần để thu thập và phân tích dữ liệu đầy đủ.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Có cần ngừng sản xuất khi thi công nâng cấp không?</summary>
+                    <div class="sol-faq__a">
+                        Hầu hết các hạng mục như nâng cấp chiếu sáng, lắp biến tần có thể thực hiện ngoài giờ sản xuất hoặc cuối tuần mà không làm gián đoạn hoạt động.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Làm sao xác nhận kết quả tiết kiệm thực tế?</summary>
+                    <div class="sol-faq__a">
+                        SG Energy áp dụng phương pháp M&V (Measurement & Verification) theo chuẩn IPMVP để đo lường và xác nhận kết quả tiết kiệm thực tế sau triển khai, đảm bảo minh bạch.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">BẮT ĐẦU TIẾT KIỆM NGAY</h2>
+                <p>Liên hệ SG Energy để được kiểm toán năng lượng miễn phí và nhận đề xuất tiết kiệm phù hợp với doanh nghiệp của bạn.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary btn-large">
+                        <span>Xem thêm giải pháp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}

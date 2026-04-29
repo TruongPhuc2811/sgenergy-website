@@ -124,7 +124,7 @@
                         <li><i class="fa-solid fa-check"></i> Tiết kiệm 50-70%</li>
                         <li><i class="fa-solid fa-check"></i> Hoàn vốn: 4-6 năm</li>
                     </ul>
-                    <a class="package-card__btn" href="#">
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="HoGiaDinh">
                         <span>Xem chi tiết</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
@@ -134,42 +134,60 @@
                     <div class="package-card__tag">Doanh nghiệp</div>
                     <h3 class="package-card__title">Giải pháp văn phòng công ty</h3>
                     <p class="package-card__desc">Ổn định nguồn điện, giảm chi phí vận hành, tăng hình ảnh “xanh”.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="VanPhongCongTy">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
 
                 <article class="package-card">
                     <div class="package-card__tag">Công nghiệp</div>
                     <h3 class="package-card__title">Giải pháp công xưởng, nhà máy</h3>
                     <p class="package-card__desc">Thiết kế theo tải tiêu thụ, tối ưu hiệu suất, giám sát thông minh.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="CongXuongNhaMay">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
 
                 <article class="package-card">
                     <div class="package-card__tag">Thiết bị</div>
                     <h3 class="package-card__title">Pin năng lượng mặt trời</h3>
                     <p class="package-card__desc">Tấm pin hiệu suất cao, tiêu chuẩn quốc tế, bảo hành lâu dài.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="PinNangLuongMatTroi">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
 
                 <article class="package-card">
                     <div class="package-card__tag">Tuần hoàn</div>
-                    <h3 class="package-card__title">Giải pháp tái chế sơ cấu</h3>
+                    <h3 class="package-card__title">Giải pháp tái chế sơ cấp</h3>
                     <p class="package-card__desc">Tái sử dụng tài nguyên, giảm phát thải, tối ưu chi phí xử lý.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="TaiCheSoCap">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
 
                 <article class="package-card">
                     <div class="package-card__tag">Môi trường</div>
                     <h3 class="package-card__title">Giải pháp xử lý chất thải</h3>
                     <p class="package-card__desc">Tư vấn – thiết kế – thi công, đáp ứng tiêu chuẩn môi trường.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="XuLyChatThai">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
 
                 <article class="package-card">
                     <div class="package-card__tag">Tiết kiệm</div>
                     <h3 class="package-card__title">Giải pháp tiết kiệm năng lượng</h3>
                     <p class="package-card__desc">Khảo sát và đề xuất phương án giảm tiêu hao, tối ưu vận hành.</p>
-                    <a class="package-card__btn" href="#">Xem chi tiết</a>
+                    <a class="package-card__btn" asp-controller="Solution" asp-action="TietKiemNangLuong">
+                        <span>Xem chi tiết</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </article>
             </div>
         </div>
@@ -252,8 +270,8 @@
                     Đội ngũ kỹ thuật luôn đồng hành cùng khách hàng trong suốt quá trình vận hành nhằm tối ưu hiệu suất hệ thống.
                 </p>
 
-                <a class="after-content__link" href="#">
-                    <span>Xem chi tiết</span>
+                <a class="after-content__link" href="/Contact">
+                    <span>Liên hệ để biết thêm</span>
                     <span class="after-content__arrow"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
             </div>
