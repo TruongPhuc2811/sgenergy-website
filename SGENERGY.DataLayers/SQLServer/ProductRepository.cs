@@ -38,7 +38,8 @@ namespace SGENERGY.DataLayers.SQLServer
           AND (@CategoryID = 0  OR CategoryID = @CategoryID)
           AND (@SupplierID = 0  OR SupplierID = @SupplierID)
           AND (@MinPrice = 0    OR Price >= @MinPrice)
-          AND (@MaxPrice = 0    OR Price <= @MaxPrice)";
+          AND (@MaxPrice = 0    OR Price <= @MaxPrice)
+          AND (@IsActive IS NULL OR IsSelling = @IsActive)";
 
             string dataSql = input.PageSize > 0
                 ? @"
@@ -48,6 +49,7 @@ namespace SGENERGY.DataLayers.SQLServer
               AND (@SupplierID = 0  OR SupplierID = @SupplierID)
               AND (@MinPrice = 0    OR Price >= @MinPrice)
               AND (@MaxPrice = 0    OR Price <= @MaxPrice)
+              AND (@IsActive IS NULL OR IsSelling = @IsActive)
             ORDER BY ProductName
             OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY"
                 : @"
@@ -57,6 +59,7 @@ namespace SGENERGY.DataLayers.SQLServer
               AND (@SupplierID = 0  OR SupplierID = @SupplierID)
               AND (@MinPrice = 0    OR Price >= @MinPrice)
               AND (@MaxPrice = 0    OR Price <= @MaxPrice)
+              AND (@IsActive IS NULL OR IsSelling = @IsActive)
             ORDER BY ProductName";
 
             var param = new
@@ -66,6 +69,7 @@ namespace SGENERGY.DataLayers.SQLServer
                 input.SupplierID,
                 input.MinPrice,
                 input.MaxPrice,
+                IsActive = input.IsActive.HasValue ? (object)input.IsActive.Value : null,
                 Offset = input.Offset,
                 input.PageSize
             };
@@ -93,6 +97,17 @@ namespace SGENERGY.DataLayers.SQLServer
 
             string sql = "SELECT * FROM Products WHERE ProductID = @ProductID";
             return await connection.QueryFirstOrDefaultAsync<Product>(sql, new { ProductID = productID });
+        }
+        /// <summary>
+        /// Lấy thông tin mặt hàng theo slug, dùng cho đường dẫn /san-pham/{slug}
+        /// </summary>
+        public async Task<Product?> GetBySlugAsync(string slug)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = "SELECT * FROM Products WHERE Slug = @Slug AND IsSelling = 1";
+            return await connection.QueryFirstOrDefaultAsync<Product>(sql, new { Slug = slug });
         }
         /// <summary>
         /// Thêm một mặt hàng mới vào cơ sở dữ liệu, trả về mã mặt hàng vừa tạo

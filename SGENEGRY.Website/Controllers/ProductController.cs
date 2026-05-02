@@ -1,52 +1,115 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using SGENERGY.BusinessLayers;
+using SGENERGY.DomainModels.Catalog;
 using SGENERGY.Website.Models;
 
 namespace SGENERGY.Website.Controllers;
 
 public class ProductController : Controller
 {
-    public IActionResult Index()
+    private const int PAGE_SIZE = 12;
+
+    /// <summary>
+    /// Trang danh sach san pham: /san-pham hoac /Product/Index
+    /// Query strings: searchValue, categoryId, supplierId, page
+    /// </summary>
+    public async Task<IActionResult> Index(
+        string? searchValue,
+        int categoryId = 0,
+        int supplierId = 0,
+        int page = 1)
     {
-        // Ảnh demo từ network (tạm thời)
-        var img = new[]
+        var input = new ProductSearchInput
         {
-            "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1584277261846-c6a1672ed979?auto=format&fit=crop&w=800&q=70"
+            SearchValue = searchValue ?? "",
+            CategoryID  = categoryId,
+            SupplierID  = supplierId,
+            Page        = page,
+            PageSize    = PAGE_SIZE,
+            IsActive    = true   // website chi hien san pham dang ban
         };
 
-        var vm = new ProductListVm
+        // Load data in parallel
+        var productsTask   = CatalogDataService.ListProductsAsync(input);
+        var categoriesTask = CatalogDataService.ListAllCategoriesAsync();
+        var suppliersTask  = PartnerDataService.ListSuppliersAsync(new SGENERGY.DomainModels.Common.PaginationSearchInput { PageSize = 0 });
+
+        // Featured: top 4 products from same category (or overall if no filter)
+        var featuredInput = new ProductSearchInput
         {
-            Title = "Tấm pin năng lượng mặt trời",
-            Categories = new()
-            {
-                new ProductCategoryVm { Name = "Tấm pin năng lượng mặt trời", Url = "/Products?cat=solar-panel", IsActive = true },
-                new ProductCategoryVm { Name = "Bộ chuyển điện - Inverter", Url = "/Products?cat=inverter" }
-            },
-            NewProducts = new()
-            {
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 450 WP", ImageUrl = img[4], DetailUrl = "/Products/Detail/5" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 530 - 555 WP", ImageUrl = img[2], DetailUrl = "/Products/Detail/3" }
-            },
-            Products = new()
-            {
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 570 WP (Hi-MO 6)", ImageUrl = img[0], DetailUrl = "/Products/Detail/1", BadgeText="G5.4" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 645 - 670 WP", ImageUrl = img[1], DetailUrl = "/Products/Detail/2", BadgeText="G5.6" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 530 - 555 WP", ImageUrl = img[2], DetailUrl = "/Products/Detail/3", BadgeText="G5.6" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Canadian 405 WP", ImageUrl = img[3], DetailUrl = "/Products/Detail/4" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 450 WP", ImageUrl = img[4], DetailUrl = "/Products/Detail/5" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 445 WP", ImageUrl = img[5], DetailUrl = "/Products/Detail/6" }
-            },
-            Page = 1,
-            TotalPages = 3
+            PageSize = 4,
+            Page     = 1,
+            IsActive = true,
+            CategoryID = categoryId > 0 ? categoryId : 0
+        };
+        var featuredTask = CatalogDataService.ListProductsAsync(featuredInput);
+
+        await Task.WhenAll(productsTask, categoriesTask, suppliersTask, featuredTask);
+
+        var vm = new ProductListPageVm
+        {
+            Products         = productsTask.Result,
+            Categories       = categoriesTask.Result,
+            Suppliers        = suppliersTask.Result.DataItems,
+            FeaturedProducts = featuredTask.Result.DataItems,
+            Filter           = input,
+            ActiveCategory   = categoryId > 0
+                ? categoriesTask.Result.FirstOrDefault(c => c.CategoryID == categoryId)
+                : null,
+            ActiveSupplier   = supplierId > 0
+                ? suppliersTask.Result.DataItems.FirstOrDefault(s => s.SupplierID == supplierId)
+                : null
         };
 
         return View(vm);
     }
 
-    // prototype detail để click "Xem chi tiết" không bị 404
-    public IActionResult Detail(int id) => Content($"Product detail prototype - id={id}");
+    /// <summary>
+    /// Trang chi tiet san pham: /san-pham/{slug}
+    /// </summary>
+    public async Task<IActionResult> Detail(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+            return NotFound();
+
+        var product = await CatalogDataService.GetProductBySlugAsync(slug);
+        if (product == null)
+            return NotFound();
+
+        // Load detail data in parallel
+        var photosTask     = CatalogDataService.ListPhotosAsync(product.ProductID);
+        var attributesTask = CatalogDataService.ListAttributesAsync(product.ProductID);
+        var categoryTask   = product.CategoryID.HasValue
+            ? CatalogDataService.GetCategoryAsync(product.CategoryID.Value)
+            : Task.FromResult<SGENERGY.DomainModels.Catalog.Category?>(null);
+        var supplierTask   = product.SupplierID.HasValue
+            ? PartnerDataService.GetSupplierAsync(product.SupplierID.Value)
+            : Task.FromResult<SGENERGY.DomainModels.Partner.Supplier?>(null);
+
+        // Related products: same category, excluding current
+        var relatedInput = new ProductSearchInput
+        {
+            PageSize   = 4,
+            Page       = 1,
+            IsActive   = true,
+            CategoryID = product.CategoryID ?? 0
+        };
+        var relatedTask = CatalogDataService.ListProductsAsync(relatedInput);
+
+        await Task.WhenAll(photosTask, attributesTask, categoryTask, supplierTask, relatedTask);
+
+        var vm = new ProductDetailVm
+        {
+            Product         = product,
+            Photos          = photosTask.Result,
+            Attributes      = attributesTask.Result,
+            Category        = categoryTask.Result,
+            Supplier        = supplierTask.Result,
+            RelatedProducts = relatedTask.Result.DataItems
+                .Where(p => p.ProductID != product.ProductID)
+                .ToList()
+        };
+
+        return View(vm);
+    }
 }

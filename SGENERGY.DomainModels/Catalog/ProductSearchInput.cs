@@ -28,5 +28,9 @@ namespace SGENERGY.DomainModels.Catalog
         /// Mức giá tối đa (0 nếu bỏ qua)
         /// </summary>
         public decimal MaxPrice { get; set; }
+        /// <summary>
+        /// Lọc theo trạng thái bán (null = bỏ qua, true = đang bán, false = ngưng bán)
+        /// </summary>
+        public bool? IsActive { get; set; }
     }
 }

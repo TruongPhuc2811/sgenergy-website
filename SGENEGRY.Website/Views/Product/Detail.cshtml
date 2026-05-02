@@ -1,0 +1,181 @@
+@model SGENERGY.Website.Models.ProductDetailVm
+@{
+    var p       = Model.Product;
+    var cat     = Model.Category;
+    var sup     = Model.Supplier;
+    ViewData["Title"] = p.ProductName;
+
+    string ImgUrl(string? photo)
+        => !string.IsNullOrWhiteSpace(photo) ? $"/images/products/{photo}" : "/image/product-placeholder.jpg";
+    string ProductDetailUrl(SGENERGY.DomainModels.Catalog.Product prod)
+        => !string.IsNullOrWhiteSpace(prod.Slug) ? $"/san-pham/{prod.Slug}" : $"/Product/Detail?id={prod.ProductID}";
+}
+
+<!-- BREADCRUMB HERO -->
+<section class="page-hero" style="--hero-img:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=2000&q=70')">
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content container">
+        <h1 class="page-hero__title">@p.ProductName</h1>
+        <div class="page-hero__crumb">
+            <a href="/">Trang chủ</a>
+            <span>/</span>
+            <a href="/san-pham">Sản phẩm</a>
+            @if (cat != null)
+            {
+                <span>/</span>
+                <a href="/san-pham?categoryId=@cat.CategoryID">@cat.CategoryName</a>
+            }
+            @if (sup != null)
+            {
+                <span>/</span>
+                <a href="/san-pham?supplierId=@sup.SupplierID">@sup.SupplierName</a>
+            }
+            <span>/</span>
+            <span>@p.ProductName</span>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="product-detail-section">
+    <div class="container">
+        <div class="product-detail-grid">
+
+            <!-- GALLERY -->
+            <div class="product-detail-gallery" data-aos="fade-right">
+                <div class="gallery-main">
+                    @if (Model.Photos.Any())
+                    {
+                        var first = Model.Photos.Where(ph => !ph.IsHidden).FirstOrDefault();
+                        <img id="galleryMain"
+                             src="@ImgUrl(first?.Photo ?? p.Photo)"
+                             alt="@p.ProductName"
+                             class="gallery-main__img" />
+                    }
+                    else
+                    {
+                        <img id="galleryMain"
+                             src="@ImgUrl(p.Photo)"
+                             alt="@p.ProductName"
+                             class="gallery-main__img" />
+                    }
+                </div>
+                @if (Model.Photos.Where(ph => !ph.IsHidden).Count() > 1)
+                {
+                    <div class="gallery-thumbs">
+                        @foreach (var photo in Model.Photos.Where(ph => !ph.IsHidden))
+                        {
+                            <button class="gallery-thumb"
+                                    onclick="document.getElementById('galleryMain').src='@ImgUrl(photo.Photo)'"
+                                    type="button"
+                                    title="@photo.Description">
+                                <img src="@ImgUrl(photo.Photo)" alt="@photo.Description" loading="lazy" />
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- INFO -->
+            <div class="product-detail-info" data-aos="fade-left">
+                <div class="product-detail-meta">
+                    @if (cat != null)
+                    {
+                        <a class="product-detail-badge" href="/san-pham?categoryId=@cat.CategoryID">
+                            <i class="fa-solid fa-tag"></i> @cat.CategoryName
+                        </a>
+                    }
+                    @if (sup != null)
+                    {
+                        <a class="product-detail-badge product-detail-badge--supplier" href="/san-pham?supplierId=@sup.SupplierID">
+                            <i class="fa-solid fa-building"></i> @sup.SupplierName
+                        </a>
+                    }
+                </div>
+
+                <h1 class="product-detail-name">@p.ProductName</h1>
+
+                @if (!string.IsNullOrWhiteSpace(p.ProductDescription))
+                {
+                    <div class="product-detail-desc">@Html.Raw(p.ProductDescription)</div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(p.Unit))
+                {
+                    <div class="product-detail-unit">
+                        <i class="fa-solid fa-ruler"></i> Đơn vị tính: <strong>@p.Unit</strong>
+                    </div>
+                }
+
+                <!-- Attributes Table -->
+                @if (Model.Attributes.Any())
+                {
+                    <div class="product-detail-attrs">
+                        <h3 class="product-detail-attrs__title">
+                            <i class="fa-solid fa-list-check"></i> Thông số kỹ thuật
+                        </h3>
+                        <table class="attrs-table">
+                            <tbody>
+                                @foreach (var attr in Model.Attributes.OrderBy(a => a.DisplayOrder))
+                                {
+                                    <tr>
+                                        <th>@attr.AttributeName</th>
+                                        <td>@attr.AttributeValue</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+                <!-- Contact CTA -->
+                <div class="product-detail-cta">
+                    <a href="/lien-he?subject=@Uri.EscapeDataString("Yêu cầu báo giá: " + p.ProductName)"
+                       class="btn-contact-product">
+                        <i class="fa-solid fa-phone"></i>
+                        Liên hệ báo giá
+                    </a>
+                    <a href="tel:0901234567" class="btn-contact-product btn-contact-product--outline">
+                        <i class="fa-solid fa-headset"></i>
+                        Gọi ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PRODUCTS -->
+        @if (Model.RelatedProducts.Any())
+        {
+            <div class="related-products" data-aos="fade-up">
+                <h2 class="related-products__title">
+                    <i class="fa-solid fa-boxes-stacked"></i> Sản phẩm liên quan
+                </h2>
+                <div class="product-grid">
+                    @foreach (var rp in Model.RelatedProducts)
+                    {
+                        <article class="product-card">
+                            <a class="product-card__img" href="@ProductDetailUrl(rp)">
+                                <img src="@ImgUrl(rp.Photo)" alt="@rp.ProductName" loading="lazy" />
+                            </a>
+                            <div class="product-card__content">
+                                <h3 class="product-card__name">
+                                    <a href="@ProductDetailUrl(rp)">@rp.ProductName</a>
+                                </h3>
+                                <div class="product-card__footer">
+                                    <a class="product-card__btn" href="@ProductDetailUrl(rp)">
+                                        <span>Xem chi tiết</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/Product.js" asp-append-version="true"></script>
+}
