@@ -1,0 +1,99 @@
+/* =====================================================
+   SOLUTION DETAIL PAGE STYLES - SG ENERGY 2026
+   Minimal additions for solution detail pages
+===================================================== */
+
+/* ===================== FAQ COMPONENT ===================== */
+.sol-faq {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.sol-faq__item {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+  transition: box-shadow var(--transition-smooth);
+}
+
+.sol-faq__item[open] {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.sol-faq__q {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  list-style: none;
+  background: var(--bg-white);
+  user-select: none;
+  transition: background var(--transition-base);
+}
+
+.sol-faq__item[open] .sol-faq__q {
+  background: linear-gradient(135deg, rgba(66, 165, 245, 0.05) 0%, rgba(0, 172, 193, 0.08) 100%);
+  color: var(--primary-color);
+}
+
+.sol-faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.sol-faq__q::after {
+  content: '\f107';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 14px;
+  margin-left: auto;
+  color: var(--primary-color);
+  transition: transform var(--transition-smooth);
+}
+
+.sol-faq__item[open] .sol-faq__q::after {
+  transform: rotate(180deg);
+}
+
+.sol-faq__q i {
+  color: var(--primary-color);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.sol-faq__a {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  font-size: 15px;
+  color: var(--text-medium);
+  line-height: 1.7;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-lighter);
+}
+
+/* ===================== PROCESS STEPS – DETAIL LAYOUT ===================== */
+/* Reuse existing .process-steps from solutions.css but ensure wrap */
+.solutions-process .process-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  row-gap: var(--spacing-xl);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .sol-faq__q {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 14px;
+  }
+
+  .sol-faq__a {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 14px;
+  }
+}

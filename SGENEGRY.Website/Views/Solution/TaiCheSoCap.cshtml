@@ -1,0 +1,272 @@
+@{
+    ViewData["Title"] = "Giải pháp tái chế sơ cấp";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "GIẢI PHÁP TÁI CHẾ SƠ CẤP",
+    BreadcrumbText = "Giải pháp / Tái chế sơ cấp",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Lợi ích</a>
+        <a class="section-nav__link" href="#quy-trinh">Quy trình</a>
+        <a class="section-nav__link" href="#pham-vi">Phạm vi dịch vụ</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Kinh tế tuần hoàn</span>
+                <h2 class="solutions-intro__title">Tái sử dụng tài nguyên,<br/><span class="highlight">giảm chi phí xử lý</span></h2>
+                <p class="solutions-intro__text">
+                    Giải pháp tái chế sơ cấp của SG Energy giúp doanh nghiệp xử lý và tái sử dụng phế liệu,
+                    phụ phẩm sản xuất ngay tại nguồn, chuyển hóa chất thải thành tài nguyên có giá trị.
+                </p>
+                <p class="solutions-intro__text">
+                    Thay vì chi phí xử lý thải đắt đỏ, doanh nghiệp có thể giảm phát thải, tiết kiệm nguyên liệu
+                    đầu vào và tạo thêm nguồn doanh thu từ vật liệu tái chế.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Giảm chi phí xử lý thải</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Thu hồi vật liệu có giá trị</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Tuân thủ quy định môi trường</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Hỗ trợ chứng nhận ISO 14001</span></div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận tư vấn miễn phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lợi ích -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">LỢI ÍCH DOANH NGHIỆP</span>
+                <h2 class="section-head__title">Từ chất thải đến<br/>giá trị kinh tế</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-coins"></i></div>
+                    <div class="benefit__title">GIẢM CHI PHÍ XỬ LÝ THẢI</div>
+                    <div class="benefit__desc">Tái chế tại chỗ hoặc bán phế liệu đã phân loại giúp giảm chi phí vận chuyển và xử lý thải.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-recycle"></i></div>
+                    <div class="benefit__title">THU HỒI VẬT LIỆU</div>
+                    <div class="benefit__desc">Kim loại, nhựa, giấy, vải… được phân loại và tái sử dụng trong quy trình sản xuất.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="benefit__title">GIẢM PHÁT THẢI</div>
+                    <div class="benefit__desc">Giảm lượng chất thải rắn ra môi trường, đóng góp vào mục tiêu phát triển bền vững.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-file-contract"></i></div>
+                    <div class="benefit__title">TUÂN THỦ PHÁP LUẬT</div>
+                    <div class="benefit__desc">Đáp ứng Luật Bảo vệ Môi trường 2020, tránh rủi ro pháp lý và xử phạt hành chính.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-handshake"></i></div>
+                    <div class="benefit__title">CHUỖI CUNG ỨNG XANH</div>
+                    <div class="benefit__desc">Đáp ứng yêu cầu tái chế từ đối tác quốc tế, mở rộng cơ hội xuất khẩu vào thị trường khắt khe.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quy trình -->
+    <section class="solutions-process" id="quy-trinh">
+        <div class="container">
+            <header class="section-head section-head--center" data-aos="fade-up">
+                <span class="section-head__kicker">QUY TRÌNH TRIỂN KHAI</span>
+                <h2 class="section-head__title">Khép kín từ đánh giá<br/>đến vận hành</h2>
+            </header>
+            <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step is-active">
+                    <div class="process-step__diamond"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="process-step__text">Kiểm tra & phân loại<br/>luồng chất thải</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-file-lines"></i></div>
+                    <div class="process-step__text">Đánh giá tiềm năng<br/>tái chế & báo cáo</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-diagram-project"></i></div>
+                    <div class="process-step__text">Thiết kế sơ đồ<br/>tái chế phù hợp</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="process-step__text">Lắp đặt thiết bị<br/>& dây chuyền</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <div class="process-step__text">Đào tạo vận hành<br/>& kiểm soát chất lượng</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-chart-bar"></i></div>
+                    <div class="process-step__text">Giám sát định kỳ<br/>& tối ưu hiệu suất</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phạm vi dịch vụ -->
+    <section class="solutions-packages" id="pham-vi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">PHẠM VI DỊCH VỤ</span>
+                <h2 class="section-head__title">Giải pháp toàn diện<br/>theo từng loại vật liệu</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-box-archive"></i></div>
+                    <h3 class="package-card__title">Tái chế vật liệu rắn</h3>
+                    <p class="package-card__desc">Kim loại vụn, nhựa, giấy carton, thủy tinh từ quá trình sản xuất.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Phân loại tự động tại nguồn</li>
+                        <li><i class="fa-solid fa-check"></i> Máy ép kiện, nghiền mảnh</li>
+                        <li><i class="fa-solid fa-check"></i> Kết nối với đơn vị tái chế đối tác</li>
+                        <li><i class="fa-solid fa-check"></i> Chứng từ xử lý đầy đủ</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Phổ biến</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-droplet"></i></div>
+                    <h3 class="package-card__title">Tái chế nước thải sản xuất</h3>
+                    <p class="package-card__desc">Xử lý và tái sử dụng nước thải trong quy trình làm mát, vệ sinh.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Hệ thống lọc đa tầng</li>
+                        <li><i class="fa-solid fa-check"></i> Tuần hoàn nước làm mát</li>
+                        <li><i class="fa-solid fa-check"></i> Tiết kiệm 30–50% nước sạch</li>
+                        <li><i class="fa-solid fa-check"></i> Đáp ứng QCVN 40:2011</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 class="package-card__title">Thu hồi nhiệt thải</h3>
+                    <p class="package-card__desc">Tận dụng nhiệt từ lò đốt, máy nén khí, lò nung cho sưởi ấm và cấp nhiệt sản xuất.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Heat exchanger công nghiệp</li>
+                        <li><i class="fa-solid fa-check"></i> Tích hợp với hệ thống HVAC</li>
+                        <li><i class="fa-solid fa-check"></i> Tiết kiệm năng lượng đáng kể</li>
+                        <li><i class="fa-solid fa-check"></i> Giảm tải hệ thống làm mát</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG THỰC TẾ</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Nhà máy cơ khí, luyện kim</div>
+                    <div class="reason-card__desc">Thu hồi kim loại vụn, phoi bào để tái nấu chảy, giảm chi phí nguyên liệu đầu vào.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Nhà máy thực phẩm</div>
+                    <div class="reason-card__desc">Tái chế bao bì, phụ phẩm hữu cơ thành phân bón hoặc khí biogas cho năng lượng tại chỗ.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Khu công nghiệp tổng hợp</div>
+                    <div class="reason-card__desc">Xây dựng hệ sinh thái cộng sinh công nghiệp: chất thải của nhà máy này là nguyên liệu của nhà máy khác.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp về<br/>giải pháp tái chế sơ cấp</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Tái chế sơ cấp khác gì so với tái chế thứ cấp?</summary>
+                    <div class="sol-faq__a">
+                        Tái chế sơ cấp (primary recycling) là xử lý vật liệu để tạo ra sản phẩm tương tự chất lượng ban đầu. Tái chế thứ cấp tạo ra sản phẩm chất lượng thấp hơn. SG Energy tập trung vào giải pháp sơ cấp để tối đa giá trị thu hồi.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Doanh nghiệp nhỏ có thể áp dụng không?</summary>
+                    <div class="sol-faq__a">
+                        Có. SG Energy có giải pháp quy mô nhỏ cho doanh nghiệp vừa và nhỏ với chi phí đầu tư hợp lý và thời gian hoàn vốn ngắn.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Có cần giấy phép môi trường cho hoạt động tái chế không?</summary>
+                    <div class="sol-faq__a">
+                        Tùy loại chất thải và quy mô xử lý. SG Energy hỗ trợ doanh nghiệp đánh giá và hoàn thiện hồ sơ pháp lý theo quy định của Luật BVMT 2020.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Thời gian hoàn vốn của dự án tái chế là bao lâu?</summary>
+                    <div class="sol-faq__a">
+                        Tùy thuộc loại vật liệu và quy mô, thông thường 2–5 năm. Doanh nghiệp được hưởng lợi từ tiết kiệm chi phí xử lý thải và doanh thu từ bán vật liệu tái chế.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">CHUYỂN CHẤT THẢI THÀNH TÀI NGUYÊN</h2>
+                <p>Liên hệ SG Energy để được đánh giá tiềm năng tái chế và tư vấn giải pháp phù hợp cho doanh nghiệp.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary btn-large">
+                        <span>Xem thêm giải pháp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}

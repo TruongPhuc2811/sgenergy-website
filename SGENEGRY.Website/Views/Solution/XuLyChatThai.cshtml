@@ -1,0 +1,272 @@
+@{
+    ViewData["Title"] = "Giải pháp xử lý chất thải";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "GIẢI PHÁP XỬ LÝ CHẤT THẢI",
+    BreadcrumbText = "Giải pháp / Xử lý chất thải",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Lợi ích</a>
+        <a class="section-nav__link" href="#quy-trinh">Quy trình</a>
+        <a class="section-nav__link" href="#pham-vi">Phạm vi dịch vụ</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Bảo vệ môi trường</span>
+                <h2 class="solutions-intro__title">Xử lý chất thải chuẩn,<br/><span class="highlight">an toàn – bền vững</span></h2>
+                <p class="solutions-intro__text">
+                    Với quy định ngày càng chặt chẽ về bảo vệ môi trường, việc xử lý chất thải đúng quy chuẩn
+                    không chỉ là nghĩa vụ pháp lý mà còn là yếu tố cạnh tranh quan trọng của doanh nghiệp.
+                </p>
+                <p class="solutions-intro__text">
+                    SG Energy cung cấp dịch vụ tư vấn – thiết kế – thi công hệ thống xử lý chất thải rắn,
+                    nước thải công nghiệp và khí thải, đáp ứng đầy đủ QCVN và tiêu chuẩn quốc tế.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Đáp ứng QCVN, TCVN</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Tư vấn pháp lý môi trường</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Thiết kế – thi công trọn gói</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Vận hành & bảo trì định kỳ</span></div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận tư vấn miễn phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lợi ích -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">LỢI ÍCH TOÀN DIỆN</span>
+                <h2 class="section-head__title">Tuân thủ pháp luật,<br/>bảo vệ uy tín doanh nghiệp</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="benefit__title">TUÂN THỦ PHÁP LUẬT</div>
+                    <div class="benefit__desc">Tránh vi phạm Luật BVMT 2020, xử phạt hành chính và đình chỉ hoạt động sản xuất.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="benefit__title">BẢO VỆ UY TÍN</div>
+                    <div class="benefit__desc">Hình ảnh doanh nghiệp sạch, có trách nhiệm môi trường – lợi thế lớn trong thời đại ESG.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-water"></i></div>
+                    <div class="benefit__title">BẢO VỆ NGUỒN NƯỚC</div>
+                    <div class="benefit__desc">Ngăn ngừa ô nhiễm mạch nước ngầm và nguồn nước mặt xung quanh khu vực sản xuất.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-wind"></i></div>
+                    <div class="benefit__title">KIỂM SOÁT KHÍ THẢI</div>
+                    <div class="benefit__desc">Hệ thống lọc bụi, khử mùi và xử lý khí độc bảo vệ sức khỏe công nhân và cộng đồng xung quanh.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="benefit__title">PHÁT TRIỂN BỀN VỮNG</div>
+                    <div class="benefit__desc">Đáp ứng tiêu chí môi trường của chuỗi cung ứng quốc tế, mở rộng thị trường xuất khẩu.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quy trình -->
+    <section class="solutions-process" id="quy-trinh">
+        <div class="container">
+            <header class="section-head section-head--center" data-aos="fade-up">
+                <span class="section-head__kicker">QUY TRÌNH TRIỂN KHAI</span>
+                <h2 class="section-head__title">Từ khảo sát đến<br/>vận hành hoàn chỉnh</h2>
+            </header>
+            <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step is-active">
+                    <div class="process-step__diamond"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div class="process-step__text">Kiểm toán chất thải<br/>& đánh giá hiện trạng</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-file-lines"></i></div>
+                    <div class="process-step__text">Thiết kế hệ thống<br/>& lập hồ sơ ĐTM</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="process-step__text">Xin phép cơ quan<br/>quản lý môi trường</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="process-step__text">Thi công lắp đặt<br/>hệ thống xử lý</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-vial-circle-check"></i></div>
+                    <div class="process-step__text">Chạy thử & lấy mẫu<br/>kiểm tra đầu ra</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-check-double"></i></div>
+                    <div class="process-step__text">Bàn giao & hợp đồng<br/>vận hành định kỳ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phạm vi dịch vụ -->
+    <section class="solutions-packages" id="pham-vi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">PHẠM VI DỊCH VỤ</span>
+                <h2 class="section-head__title">Giải pháp toàn diện<br/>các loại chất thải</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-tint"></i></div>
+                    <h3 class="package-card__title">Xử lý nước thải</h3>
+                    <p class="package-card__desc">Hệ thống xử lý nước thải công nghiệp đạt QCVN 40:2011/BTNMT.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Xử lý cơ – lý – hóa – sinh</li>
+                        <li><i class="fa-solid fa-check"></i> Công suất 10–5.000 m³/ngày</li>
+                        <li><i class="fa-solid fa-check"></i> Tái sử dụng nước sau xử lý</li>
+                        <li><i class="fa-solid fa-check"></i> Giám sát tự động trực tuyến</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Phổ biến</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-trash-can"></i></div>
+                    <h3 class="package-card__title">Xử lý chất thải rắn</h3>
+                    <p class="package-card__desc">Phân loại, thu gom, lưu trữ và xử lý chất thải rắn công nghiệp.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Phân loại tại nguồn</li>
+                        <li><i class="fa-solid fa-check"></i> Hệ thống thu gom & vận chuyển</li>
+                        <li><i class="fa-solid fa-check"></i> Đốt hoặc chôn lấp hợp vệ sinh</li>
+                        <li><i class="fa-solid fa-check"></i> Hồ sơ, chứng từ đầy đủ</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-smog"></i></div>
+                    <h3 class="package-card__title">Xử lý khí thải</h3>
+                    <p class="package-card__desc">Hệ thống lọc bụi, khử mùi, trung hòa khí acid từ quá trình sản xuất.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Cyclone, buồng lắng, lọc túi vải</li>
+                        <li><i class="fa-solid fa-check"></i> Scrubber hóa học khử SOx, NOx</li>
+                        <li><i class="fa-solid fa-check"></i> Thiết bị quan trắc khí thải liên tục</li>
+                        <li><i class="fa-solid fa-check"></i> Đáp ứng QCVN 19:2009/BTNMT</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG THỰC TẾ</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Khu công nghiệp tập trung</div>
+                    <div class="reason-card__desc">Hệ thống xử lý nước thải tập trung cho toàn khu, tiết kiệm chi phí đầu tư và vận hành.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Nhà máy hóa chất, sơn</div>
+                    <div class="reason-card__desc">Xử lý nước thải và khí thải có chứa dung môi hữu cơ, kim loại nặng theo tiêu chuẩn nghiêm ngặt.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Bệnh viện, cơ sở y tế</div>
+                    <div class="reason-card__desc">Xử lý chất thải y tế nguy hại đúng quy định, bảo vệ sức khỏe cộng đồng và môi trường.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp về<br/>xử lý chất thải</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Doanh nghiệp có bắt buộc phải có hệ thống xử lý nước thải không?</summary>
+                    <div class="sol-faq__a">
+                        Theo Luật BVMT 2020, doanh nghiệp xả thải ra môi trường phải có hệ thống xử lý đạt chuẩn. Vi phạm có thể bị phạt đến hàng tỷ đồng và đình chỉ hoạt động.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Thời gian thi công hệ thống xử lý nước thải mất bao lâu?</summary>
+                    <div class="sol-faq__a">
+                        Tùy quy mô: hệ thống nhỏ (50–100 m³/ngày) mất khoảng 1–2 tháng. Hệ thống lớn hơn có thể mất 3–6 tháng bao gồm cả thời gian xin phép.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Chi phí vận hành hệ thống xử lý có cao không?</summary>
+                    <div class="sol-faq__a">
+                        Chi phí vận hành thường 500 đồng đến 3.000 đồng/m³ nước thải tùy công nghệ và tải trọng ô nhiễm. SG Energy tư vấn giải pháp tối ưu chi phí vận hành lâu dài.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Có hỗ trợ vận hành và báo cáo quan trắc không?</summary>
+                    <div class="sol-faq__a">
+                        Có. SG Energy cung cấp dịch vụ vận hành thuê, lấy mẫu và lập báo cáo quan trắc định kỳ theo yêu cầu của Sở TN&MT địa phương.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">XỬ LÝ CHẤT THẢI ĐÚNG CHUẨN</h2>
+                <p>Liên hệ SG Energy để được kiểm toán hiện trạng và thiết kế giải pháp xử lý chất thải phù hợp nhất.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary btn-large">
+                        <span>Xem thêm giải pháp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}

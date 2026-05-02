@@ -1,0 +1,273 @@
+@{
+    ViewData["Title"] = "Giải pháp văn phòng công ty";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "GIẢI PHÁP VĂN PHÒNG CÔNG TY",
+    BreadcrumbText = "Giải pháp / Văn phòng công ty",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Lợi ích</a>
+        <a class="section-nav__link" href="#quy-trinh">Quy trình</a>
+        <a class="section-nav__link" href="#thiet-bi">Thiết bị</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng thực tế</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Điện mặt trời doanh nghiệp</span>
+                <h2 class="solutions-intro__title">Giảm chi phí vận hành,<br/><span class="highlight">tăng hình ảnh xanh</span></h2>
+                <p class="solutions-intro__text">
+                    Văn phòng và công ty thường tiêu thụ điện năng lớn trong giờ hành chính – đúng lúc hệ thống
+                    điện mặt trời phát điện mạnh nhất. Đây là lợi thế đặc biệt giúp doanh nghiệp tự sản xuất và
+                    sử dụng điện ngay tại chỗ, giảm chi phí tối đa.
+                </p>
+                <p class="solutions-intro__text">
+                    Ngoài lợi ích kinh tế, hệ thống điện mặt trời còn là tuyên ngôn "doanh nghiệp xanh",
+                    nâng cao uy tín thương hiệu trước đối tác và khách hàng.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Công suất: 10–100 kWp</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Tiết kiệm 40–60% điện năng</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Hoàn vốn: 5–7 năm</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Chứng nhận ESG hỗ trợ</span></div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận tư vấn miễn phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1497366754035-f200586563b6?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lợi ích -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">LỢI ÍCH DOANH NGHIỆP</span>
+                <h2 class="section-head__title">Đầu tư một lần,<br/>lợi ích dài hạn</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="benefit__title">GIẢM CHI PHÍ VẬN HÀNH</div>
+                    <div class="benefit__desc">Cắt giảm 40–60% hóa đơn điện, cải thiện biên lợi nhuận doanh nghiệp.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-award"></i></div>
+                    <div class="benefit__title">NÂNG CAO THƯƠNG HIỆU</div>
+                    <div class="benefit__desc">Thể hiện cam kết phát triển bền vững, thu hút đối tác và khách hàng xanh.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-plug-circle-bolt"></i></div>
+                    <div class="benefit__title">ỔN ĐỊNH NGUỒN ĐIỆN</div>
+                    <div class="benefit__desc">Giảm phụ thuộc vào lưới điện, hạn chế gián đoạn sản xuất kinh doanh.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div class="benefit__title">KHẤU TRỪ THUẾ</div>
+                    <div class="benefit__desc">Chi phí đầu tư hệ thống được hạch toán vào chi phí hợp lệ, giảm thuế thu nhập doanh nghiệp.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="benefit__title">GIẢM PHÁT THẢI CARBON</div>
+                    <div class="benefit__desc">Đáp ứng tiêu chí ESG và cam kết Net Zero ngày càng được yêu cầu trong chuỗi cung ứng quốc tế.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quy trình -->
+    <section class="solutions-process" id="quy-trinh">
+        <div class="container">
+            <header class="section-head section-head--center" data-aos="fade-up">
+                <span class="section-head__kicker">QUY TRÌNH TRIỂN KHAI</span>
+                <h2 class="section-head__title">Từ khảo sát đến vận hành<br/>chỉ trong 2–4 tuần</h2>
+            </header>
+            <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step is-active">
+                    <div class="process-step__diamond"><i class="fa-regular fa-comments"></i></div>
+                    <div class="process-step__text">Tiếp nhận yêu cầu<br/>& đánh giá ban đầu</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <div class="process-step__text">Khảo sát tải điện<br/>& mặt bằng lắp đặt</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-file-lines"></i></div>
+                    <div class="process-step__text">Thiết kế hệ thống<br/>& báo giá chi tiết</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-pen-to-square"></i></div>
+                    <div class="process-step__text">Ký hợp đồng<br/>& lập kế hoạch thi công</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="process-step__text">Thi công & lắp đặt<br/>(3–10 ngày)</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-check-double"></i></div>
+                    <div class="process-step__text">Nghiệm thu, bàn giao<br/>& đào tạo vận hành</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thiết bị -->
+    <section class="solutions-packages" id="thiet-bi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">HẠNG MỤC THIẾT BỊ</span>
+                <h2 class="section-head__title">Cấu hình linh hoạt<br/>theo quy mô văn phòng</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-building"></i></div>
+                    <h3 class="package-card__title">Gói Nhỏ – 10–20 kWp</h3>
+                    <p class="package-card__desc">Phù hợp văn phòng dưới 50 người, tòa nhà nhỏ.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Tấm pin mono 400W</li>
+                        <li><i class="fa-solid fa-check"></i> Inverter 3-phase 10–20kW</li>
+                        <li><i class="fa-solid fa-check"></i> Tủ điện AC/DC, chống sét</li>
+                        <li><i class="fa-solid fa-check"></i> Portal giám sát online</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Phổ biến</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-city"></i></div>
+                    <h3 class="package-card__title">Gói Vừa – 30–50 kWp</h3>
+                    <p class="package-card__desc">Lý tưởng cho tòa nhà văn phòng 5–10 tầng.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Tấm pin bifacial 450W</li>
+                        <li><i class="fa-solid fa-check"></i> Multi-string inverter 3-phase</li>
+                        <li><i class="fa-solid fa-check"></i> Hệ thống monitoring SCADA</li>
+                        <li><i class="fa-solid fa-check"></i> Báo cáo tự động theo tháng</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-landmark"></i></div>
+                    <h3 class="package-card__title">Gói Lớn – 50–100 kWp</h3>
+                    <p class="package-card__desc">Dành cho tòa nhà thương mại, trung tâm mua sắm nhỏ.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Tấm pin half-cell monoPerc</li>
+                        <li><i class="fa-solid fa-check"></i> Central inverter + lưu trữ tùy chọn</li>
+                        <li><i class="fa-solid fa-check"></i> Tích hợp hệ thống BMS tòa nhà</li>
+                        <li><i class="fa-solid fa-check"></i> Báo cáo ESG đầy đủ</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng thực tế -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1497366754035-f200586563b6?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG THỰC TẾ</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Tòa nhà văn phòng cho thuê</div>
+                    <div class="reason-card__desc">Chủ đầu tư cắt giảm chi phí điện sinh hoạt chung, tăng lợi nhuận cho thuê.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Công ty sản xuất phần mềm</div>
+                    <div class="reason-card__desc">Tiết kiệm đáng kể chi phí điện cho máy chủ và thiết bị văn phòng hoạt động liên tục.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Doanh nghiệp xuất khẩu</div>
+                    <div class="reason-card__desc">Đáp ứng yêu cầu xanh từ đối tác quốc tế, cải thiện chỉ số bền vững của công ty.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp thắc mắc<br/>cho doanh nghiệp</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Hệ thống có ảnh hưởng đến hoạt động văn phòng khi thi công không?</summary>
+                    <div class="sol-faq__a">
+                        Thi công chủ yếu trên mái và các khu vực kỹ thuật, không ảnh hưởng đến hoạt động văn phòng bên trong. SG Energy có thể bố trí thi công ngoài giờ hành chính nếu cần.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Điện dư có bán lại cho lưới không?</summary>
+                    <div class="sol-faq__a">
+                        Có. Với hệ thống on-grid, điện phát vượt nhu cầu sử dụng sẽ bán lại cho EVN theo giá FIT hiện hành, tạo thêm nguồn thu cho doanh nghiệp.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Cần diện tích mái bao nhiêu cho hệ thống 50 kWp?</summary>
+                    <div class="sol-faq__a">
+                        Khoảng 300–350 m² mái phẳng hoặc mái nghiêng hướng Nam. SG Energy sẽ khảo sát và tối ưu thiết kế phù hợp với diện tích thực tế.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Có hỗ trợ lập báo cáo ESG không?</summary>
+                    <div class="sol-faq__a">
+                        SG Energy cung cấp số liệu sản lượng điện, lượng CO₂ giảm thiểu hàng năm, hỗ trợ doanh nghiệp lập báo cáo phát triển bền vững.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">CHUYỂN ĐỔI XANH NGAY HÔM NAY</h2>
+                <p>Liên hệ SG Energy để được tư vấn giải pháp điện mặt trời tối ưu cho văn phòng của bạn.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary btn-large">
+                        <span>Xem thêm giải pháp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}

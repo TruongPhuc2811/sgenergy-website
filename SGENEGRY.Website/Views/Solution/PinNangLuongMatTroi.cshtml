@@ -1,0 +1,269 @@
+@{
+    ViewData["Title"] = "Pin năng lượng mặt trời";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "PIN NĂNG LƯỢNG MẶT TRỜI",
+    BreadcrumbText = "Giải pháp / Pin năng lượng mặt trời",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Ưu điểm</a>
+        <a class="section-nav__link" href="#chung-loai">Chủng loại</a>
+        <a class="section-nav__link" href="#thiet-bi">Thông số kỹ thuật</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Thiết bị chính hãng</span>
+                <h2 class="solutions-intro__title">Tấm pin hiệu suất cao,<br/><span class="highlight">bền bỉ 25 năm</span></h2>
+                <p class="solutions-intro__text">
+                    Tấm pin năng lượng mặt trời là trái tim của mọi hệ thống điện mặt trời. SG Energy cung cấp
+                    và tư vấn lựa chọn tấm pin phù hợp từ các thương hiệu hàng đầu thế giới, được kiểm định
+                    theo tiêu chuẩn quốc tế IEC và UL.
+                </p>
+                <p class="solutions-intro__text">
+                    Với nhiều công nghệ tấm pin đa dạng – mono, bifacial, half-cell, PERC – chúng tôi tư vấn
+                    giải pháp tối ưu nhất cho từng ứng dụng và ngân sách của khách hàng.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Hiệu suất đến 23%</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Bảo hành hiệu suất 25 năm</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Chứng nhận IEC 61215/61730</span></div>
+                    <div class="feature-badge"><i class="fa-solid fa-check-circle"></i><span>Chống ăn mòn, chịu thời tiết</span></div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận báo giá tấm pin</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ưu điểm -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">ƯU ĐIỂM SẢN PHẨM</span>
+                <h2 class="section-head__title">Tại sao chọn<br/>tấm pin SG Energy?</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-sun"></i></div>
+                    <div class="benefit__title">HIỆU SUẤT CHUYỂN ĐỔI CAO</div>
+                    <div class="benefit__desc">Công nghệ mono PERC/TOPCon đạt hiệu suất 21–23%, tối đa hóa sản lượng điện trên mỗi m².</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-temperature-low"></i></div>
+                    <div class="benefit__title">HỆ SỐ NHIỆT ĐỘ TỐT</div>
+                    <div class="benefit__desc">Suy giảm ít theo nhiệt độ, đặc biệt phù hợp với khí hậu nhiệt đới nóng ẩm Việt Nam.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="benefit__title">ĐỘ BỀN CAO</div>
+                    <div class="benefit__desc">Khung nhôm anodized, kính cường lực, chống va đập, chịu tuyết và gió bão cấp 11.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-certificate"></i></div>
+                    <div class="benefit__title">CHỨNG NHẬN ĐẦY ĐỦ</div>
+                    <div class="benefit__desc">IEC 61215, IEC 61730, MCS, TÜV, MNRE – đủ điều kiện lắp đặt và đấu nối lưới toàn quốc.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="benefit__title">GIÁ TRỊ VÒNG ĐỜI</div>
+                    <div class="benefit__desc">Bảo hành sản phẩm 10–12 năm, bảo hành hiệu suất 80% sau 25 năm – an tâm đầu tư dài hạn.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chủng loại -->
+    <section class="solutions-packages" id="chung-loai">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CHỦNG LOẠI TẤM PIN</span>
+                <h2 class="section-head__title">Đa dạng công nghệ,<br/>phù hợp mọi nhu cầu</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">Mono PERC / Half-Cell</h3>
+                    <p class="package-card__desc">Phổ biến nhất, cân bằng tốt giữa hiệu suất và chi phí.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Hiệu suất: 20–22%</li>
+                        <li><i class="fa-solid fa-check"></i> Công suất: 400–550W</li>
+                        <li><i class="fa-solid fa-check"></i> Ứng dụng: dân dụng, thương mại</li>
+                        <li><i class="fa-solid fa-check"></i> Bảo hành hiệu suất 25 năm</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Hiệu suất cao</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">Bifacial (2 mặt)</h3>
+                    <p class="package-card__desc">Thu năng lượng cả mặt trước và mặt sau, tăng sản lượng 5–15%.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Hiệu suất: 21–23%</li>
+                        <li><i class="fa-solid fa-check"></i> Công suất: 450–600W</li>
+                        <li><i class="fa-solid fa-check"></i> Tối ưu mái màu sáng, bề mặt phản xạ</li>
+                        <li><i class="fa-solid fa-check"></i> Tăng sản lượng 5–15% so với 1 mặt</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">TOPCon / HJT</h3>
+                    <p class="package-card__desc">Công nghệ thế hệ mới, hiệu suất vượt trội, tổn thất thấp.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> Hiệu suất: 22–24%</li>
+                        <li><i class="fa-solid fa-check"></i> Công suất: 500–700W</li>
+                        <li><i class="fa-solid fa-check"></i> Tổn thất nhiệt độ thấp nhất</li>
+                        <li><i class="fa-solid fa-check"></i> Lý tưởng cho diện tích mái hạn chế</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thông số kỹ thuật -->
+    <section class="solutions-benefits" id="thiet-bi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">THÔNG SỐ TIÊU BIỂU</span>
+                <h2 class="section-head__title">Thông số kỹ thuật<br/>tấm pin phổ biến</h2>
+            </header>
+            <div class="reasons-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px;" data-aos="fade-up" data-aos-delay="100">
+                <div class="reason-card" style="background:#fff; border-radius:12px; padding:24px; box-shadow: var(--shadow-sm);">
+                    <div class="reason-card__num" style="font-size:14px; font-weight:700; color:var(--primary-color);">KÍCH THƯỚC</div>
+                    <div class="reason-card__title">2.278 × 1.134 × 30 mm</div>
+                    <div class="reason-card__desc">Kích thước tiêu chuẩn tấm pin 450–500W full-size</div>
+                </div>
+                <div class="reason-card" style="background:#fff; border-radius:12px; padding:24px; box-shadow: var(--shadow-sm);">
+                    <div class="reason-card__num" style="font-size:14px; font-weight:700; color:var(--primary-color);">TRỌNG LƯỢNG</div>
+                    <div class="reason-card__title">~28 kg/tấm</div>
+                    <div class="reason-card__desc">Khung nhôm nhẹ, tải trọng phân bổ đều trên kết cấu</div>
+                </div>
+                <div class="reason-card" style="background:#fff; border-radius:12px; padding:24px; box-shadow: var(--shadow-sm);">
+                    <div class="reason-card__num" style="font-size:14px; font-weight:700; color:var(--primary-color);">ĐIỆN ÁP VẬN HÀNH</div>
+                    <div class="reason-card__title">Vmpp: 38–45 V</div>
+                    <div class="reason-card__desc">Tương thích với mọi inverter phổ biến trên thị trường</div>
+                </div>
+                <div class="reason-card" style="background:#fff; border-radius:12px; padding:24px; box-shadow: var(--shadow-sm);">
+                    <div class="reason-card__num" style="font-size:14px; font-weight:700; color:var(--primary-color);">CHỊU TẢI TUYẾT / GIÓ</div>
+                    <div class="reason-card__title">5.400 Pa / 2.400 Pa</div>
+                    <div class="reason-card__desc">Chịu tải cơ học cao, an toàn trong mọi điều kiện thời tiết</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG TIÊU BIỂU</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Hộ gia đình & nhà ở</div>
+                    <div class="reason-card__desc">Tấm pin mono PERC công suất 400–450W, gọn nhẹ, phù hợp mái nhà phố và biệt thự.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Thương mại & văn phòng</div>
+                    <div class="reason-card__desc">Tấm pin bifacial giúp tối ưu sản lượng trên mái bằng rộng của tòa nhà văn phòng.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Nhà máy & khu công nghiệp</div>
+                    <div class="reason-card__desc">Tấm pin half-cell công suất lớn, thiết kế module chịu tải, dễ lắp đặt trên kết cấu mái nhà xưởng.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp về<br/>tấm pin mặt trời</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Nên chọn tấm pin mono hay polycrystalline?</summary>
+                    <div class="sol-faq__a">
+                        Mono (đơn tinh thể) có hiệu suất và tuổi thọ cao hơn, phù hợp khi diện tích mái hạn chế. Polycrystalline (đa tinh thể) giá rẻ hơn nhưng hiệu suất thấp hơn. Hiện nay SG Energy khuyến nghị dùng mono PERC/TOPCon vì chi phí đã giảm đáng kể.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Tấm pin có bị giảm hiệu suất theo thời gian không?</summary>
+                    <div class="sol-faq__a">
+                        Tất cả tấm pin có suy giảm hiệu suất tự nhiên khoảng 0,5–0,7%/năm. Sau 25 năm, hiệu suất vẫn đảm bảo tối thiểu 80% so với ban đầu theo bảo hành nhà sản xuất.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> SG Energy phân phối thương hiệu nào?</summary>
+                    <div class="sol-faq__a">
+                        SG Energy cung cấp tấm pin từ các thương hiệu uy tín như JA Solar, Longi, Trina Solar, Canadian Solar, Jinko Solar – tất cả đều có chứng nhận và bảo hành chính hãng.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Cần bảo dưỡng tấm pin như thế nào?</summary>
+                    <div class="sol-faq__a">
+                        Vệ sinh bề mặt tấm pin bằng nước sạch 1–2 lần/năm để loại bỏ bụi bẩn. Tránh dùng hóa chất mạnh hoặc vật cứng gây trầy xước bề mặt kính.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">NHẬN BÁO GIÁ TẤM PIN</h2>
+                <p>Liên hệ SG Energy để được tư vấn lựa chọn tấm pin phù hợp và nhận báo giá cạnh tranh nhất.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Product" class="btn-secondary btn-large">
+                        <span>Xem sản phẩm</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}

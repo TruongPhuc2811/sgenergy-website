@@ -1,0 +1,287 @@
+@{
+    ViewData["Title"] = "Giải pháp hộ gia đình";
+}
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "GIẢI PHÁP HỘ GIA ĐÌNH",
+    BreadcrumbText = "Giải pháp / Hộ gia đình",
+    BackgroundImageUrl = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=2000&q=70"
+})
+
+<!-- Section Nav -->
+<nav class="section-nav" aria-label="Điều hướng nội dung">
+    <div class="container section-nav__inner">
+        <a class="section-nav__link" href="#gioi-thieu">Giới thiệu</a>
+        <a class="section-nav__link" href="#loi-ich">Lợi ích</a>
+        <a class="section-nav__link" href="#quy-trinh">Quy trình</a>
+        <a class="section-nav__link" href="#thiet-bi">Thiết bị</a>
+        <a class="section-nav__link" href="#ung-dung">Ứng dụng thực tế</a>
+        <a class="section-nav__link" href="#faq">FAQ</a>
+        <a class="section-nav__link" href="#lien-he">Liên hệ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Giới thiệu -->
+    <section class="solutions-intro" id="gioi-thieu">
+        <div class="container solutions-intro__wrap">
+            <div class="solutions-intro__left" data-aos="fade-right">
+                <span class="section-badge">Điện mặt trời hộ gia đình</span>
+                <h2 class="solutions-intro__title">Tiết kiệm điện,<br/><span class="highlight">sống xanh bền vững</span></h2>
+                <p class="solutions-intro__text">
+                    Hệ thống điện mặt trời áp mái cho hộ gia đình là giải pháp thông minh giúp chủ nhà
+                    giảm từ 50–70% chi phí điện hàng tháng, đồng thời góp phần bảo vệ môi trường.
+                </p>
+                <p class="solutions-intro__text">
+                    SG Energy cung cấp trọn gói từ khảo sát, thiết kế, thi công đến bảo hành sau lắp đặt,
+                    đảm bảo hệ thống hoạt động ổn định suốt 25 năm tuổi thọ.
+                </p>
+                <div class="solutions-intro__features">
+                    <div class="feature-badge">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Công suất: 3–10 kWp</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Tiết kiệm 50–70% tiền điện</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Hoàn vốn: 4–6 năm</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Bảo hành 25 năm hiệu suất pin</span>
+                    </div>
+                </div>
+                <div class="solutions-intro__actions">
+                    <a href="~/Contact" class="btn-primary btn-icon">
+                        <span>Nhận tư vấn miễn phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Quay lại giải pháp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="solutions-intro__right" aria-hidden="true" data-aos="fade-left">
+                <div class="solutions-intro__bg"
+                     style="background-image:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1600&q=70')">
+                    <div class="solutions-intro__overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lợi ích -->
+    <section class="solutions-benefits" id="loi-ich" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">TẠI SAO NÊN LẮP ĐẶT?</span>
+                <h2 class="section-head__title">Lợi ích vượt trội<br/>cho gia đình bạn</h2>
+            </header>
+            <div class="benefit-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="benefit__title">GIẢM MẠNH HÓA ĐƠN ĐIỆN</div>
+                    <div class="benefit__desc">Tiết kiệm 50–70% chi phí điện hàng tháng, thu hồi vốn đầu tư chỉ trong 4–6 năm.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="benefit__title">ĐỘC LẬP NGUỒN ĐIỆN</div>
+                    <div class="benefit__desc">Tích hợp bộ lưu điện giúp gia đình có điện dự phòng khi mất điện lưới.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="benefit__title">THÂN THIỆN MÔI TRƯỜNG</div>
+                    <div class="benefit__desc">Giảm phát thải CO₂, góp phần xây dựng lối sống xanh và bền vững.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-house-signal"></i></div>
+                    <div class="benefit__title">TĂNG GIÁ TRỊ NHÀ Ở</div>
+                    <div class="benefit__desc">Hệ thống điện mặt trời là tài sản cộng thêm, nâng cao giá trị bất động sản.</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit__icon"><i class="fa-solid fa-shield-heart"></i></div>
+                    <div class="benefit__title">BẢO HÀNH TOÀN DIỆN</div>
+                    <div class="benefit__desc">Bảo hành hiệu suất tấm pin 25 năm, inverter 5 năm, kết cấu khung 5 năm.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quy trình -->
+    <section class="solutions-process" id="quy-trinh">
+        <div class="container">
+            <header class="section-head section-head--center" data-aos="fade-up">
+                <span class="section-head__kicker">QUY TRÌNH CHUYÊN NGHIỆP</span>
+                <h2 class="section-head__title">Triển khai nhanh chóng,<br/>an toàn & đúng tiến độ</h2>
+            </header>
+            <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step is-active">
+                    <div class="process-step__diamond"><i class="fa-regular fa-comments"></i></div>
+                    <div class="process-step__text">Tiếp nhận yêu cầu<br/>khách hàng</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <div class="process-step__text">Khảo sát & đo đạc<br/>chính xác (1 ngày)</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-file-lines"></i></div>
+                    <div class="process-step__text">Thiết kế & báo giá<br/>(1–2 ngày)</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-regular fa-pen-to-square"></i></div>
+                    <div class="process-step__text">Ký hợp đồng<br/>& đặt cọc</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="process-step__text">Lắp đặt & vận hành<br/>(1–3 ngày)</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__diamond"><i class="fa-solid fa-check-double"></i></div>
+                    <div class="process-step__text">Nghiệm thu &<br/>bàn giao hồ sơ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thiết bị / Hạng mục -->
+    <section class="solutions-packages" id="thiet-bi" style="background: var(--bg-light);">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">HẠNG MỤC THIẾT BỊ</span>
+                <h2 class="section-head__title">Cấu hình hệ thống<br/>tiêu biểu</h2>
+            </header>
+            <div class="package-grid" data-aos="fade-up" data-aos-delay="100">
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">Gói Cơ Bản – 3 kWp</h3>
+                    <p class="package-card__desc">Phù hợp hộ gia đình nhỏ 2–4 người, tiêu thụ điện trung bình.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> 8 tấm pin 375W hiệu suất cao</li>
+                        <li><i class="fa-solid fa-check"></i> Inverter hybrid 3kW</li>
+                        <li><i class="fa-solid fa-check"></i> Kết cấu khung nhôm chống ăn mòn</li>
+                        <li><i class="fa-solid fa-check"></i> Hệ thống giám sát qua app</li>
+                    </ul>
+                </article>
+                <article class="package-card package-card--featured">
+                    <div class="package-card__badge">Phổ biến</div>
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">Gói Tiêu Chuẩn – 5 kWp</h3>
+                    <p class="package-card__desc">Lý tưởng cho hộ gia đình 4–6 người, tiết kiệm tối ưu.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> 13 tấm pin 400W mono</li>
+                        <li><i class="fa-solid fa-check"></i> Inverter on-grid/hybrid 5kW</li>
+                        <li><i class="fa-solid fa-check"></i> Tủ điện DC/AC, chống sét</li>
+                        <li><i class="fa-solid fa-check"></i> Giám sát từ xa 24/7</li>
+                    </ul>
+                </article>
+                <article class="package-card">
+                    <div class="package-card__icon"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="package-card__title">Gói Cao Cấp – 10 kWp</h3>
+                    <p class="package-card__desc">Dành cho biệt thự, hộ tiêu thụ điện cao, tích hợp lưu trữ.</p>
+                    <ul class="package-card__features">
+                        <li><i class="fa-solid fa-check"></i> 25 tấm pin 400W bifacial</li>
+                        <li><i class="fa-solid fa-check"></i> Inverter hybrid 10kW + bộ lưu trữ 10kWh</li>
+                        <li><i class="fa-solid fa-check"></i> Bộ điều khiển MPPT đa kênh</li>
+                        <li><i class="fa-solid fa-check"></i> Cài đặt & vận hành thông minh</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ứng dụng thực tế -->
+    <section class="solutions-reasons" id="ung-dung"
+             style="--reasons-img:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-reasons__overlay"></div>
+        <div class="container solutions-reasons__wrap">
+            <h2 class="reasons-title">ỨNG DỤNG THỰC TẾ</h2>
+            <div class="reasons-cards">
+                <article class="reason-card">
+                    <div class="reason-card__num">01</div>
+                    <div class="reason-card__title">Nhà phố – căn hộ mái bằng</div>
+                    <div class="reason-card__desc">Lắp đặt trên mái bê tông, tối ưu diện tích, phù hợp không gian đô thị.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">02</div>
+                    <div class="reason-card__title">Biệt thự – nhà vườn</div>
+                    <div class="reason-card__desc">Hệ thống công suất lớn, tích hợp lưu trữ, đảm bảo điện 24/7 ngay cả khi mất lưới.</div>
+                </article>
+                <article class="reason-card">
+                    <div class="reason-card__num">03</div>
+                    <div class="reason-card__title">Nhà mái ngói, mái tôn</div>
+                    <div class="reason-card__desc">Giải pháp kẹp chuyên dụng phù hợp từng loại mái, đảm bảo thẩm mỹ và độ bền.</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="solutions-benefits" id="faq">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="section-head__kicker">CÂU HỎI THƯỜNG GẶP</span>
+                <h2 class="section-head__title">Giải đáp thắc mắc<br/>cho gia đình bạn</h2>
+            </header>
+            <div class="sol-faq" data-aos="fade-up" data-aos-delay="100">
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Lắp điện mặt trời có cần xin phép không?</summary>
+                    <div class="sol-faq__a">
+                        Hệ thống điện mặt trời hộ gia đình công suất dưới 100 kWp thường chỉ cần đăng ký với
+                        điện lực địa phương để đấu nối lưới. SG Energy hỗ trợ toàn bộ thủ tục pháp lý cho khách hàng.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Thời gian thi công mất bao lâu?</summary>
+                    <div class="sol-faq__a">
+                        Thông thường 1–3 ngày tùy quy mô hệ thống. Khảo sát và thiết kế mất 1–2 ngày trước đó.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Mùa mưa, ngày u ám có phát điện không?</summary>
+                    <div class="sol-faq__a">
+                        Hệ thống vẫn phát điện được trong điều kiện ít nắng, tuy nhiên hiệu suất giảm khoảng 30–50%.
+                        Bộ lưu trữ (nếu có) giúp đảm bảo điện liên tục.
+                    </div>
+                </details>
+                <details class="sol-faq__item">
+                    <summary class="sol-faq__q"><i class="fa-solid fa-circle-question"></i> Chi phí bảo trì hàng năm là bao nhiêu?</summary>
+                    <div class="sol-faq__a">
+                        Hệ thống điện mặt trời gần như không cần bảo trì thường xuyên. Chỉ cần vệ sinh tấm pin
+                        1–2 lần/năm và kiểm tra hệ thống định kỳ, chi phí rất thấp.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Liên hệ -->
+    <section class="solutions-after" id="lien-he"
+             style="--after-img:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2000&q=70')">
+        <div class="solutions-after__overlay"></div>
+        <div class="container solutions-after__wrap">
+            <div class="after-content" style="max-width:700px; margin:0 auto; text-align:center;">
+                <h2 class="after-content__title">SẴN SÀNG TIẾT KIỆM ĐIỆN?</h2>
+                <p>Liên hệ SG Energy ngay hôm nay để được tư vấn miễn phí, khảo sát thực địa và nhận báo giá chi tiết.</p>
+                <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+                    <a href="~/Contact" class="btn-primary btn-icon btn-large">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Liên hệ tư vấn ngay</span>
+                    </a>
+                    <a href="~/Solution" class="btn-secondary btn-large">
+                        <span>Xem thêm giải pháp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/solution-detail.css" asp-append-version="true" />
+}
