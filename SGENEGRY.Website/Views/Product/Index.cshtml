@@ -22,7 +22,7 @@
     }
 
     string ProductImageUrl(SGENERGY.DomainModels.Catalog.Product p)
-        => !string.IsNullOrWhiteSpace(p.Photo) ? $"/images/products/{p.Photo}" : "/image/product-placeholder.jpg";
+        => !string.IsNullOrWhiteSpace(p.Photo) ? $"/images/products/{p.Photo}" : "/images/product-placeholder.jpg";
 
     string ProductDetailUrl(SGENERGY.DomainModels.Catalog.Product p)
         => !string.IsNullOrWhiteSpace(p.Slug) ? $"/san-pham/{p.Slug}" : $"/Product/Detail?id={p.ProductID}";

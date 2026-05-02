@@ -22,7 +22,7 @@ public class ProductListPageVm
 // --- Legacy prototype models ---
 public class ProductListVm
 {
-    public string Title { get; set; } = "San pham";
+    public string Title { get; set; } = "Sản phẩm";
     public List<ProductCategoryVm> Categories { get; set; } = [];
     public List<ProductFilterGroupVm> FilterGroups { get; set; } = [];
     public List<ProductCardVm> NewProducts { get; set; } = [];

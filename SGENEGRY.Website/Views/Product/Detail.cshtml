@@ -6,7 +6,7 @@
     ViewData["Title"] = p.ProductName;
 
     string ImgUrl(string? photo)
-        => !string.IsNullOrWhiteSpace(photo) ? $"/images/products/{photo}" : "/image/product-placeholder.jpg";
+        => !string.IsNullOrWhiteSpace(photo) ? $"/images/products/{photo}" : "/images/product-placeholder.jpg";
     string ProductDetailUrl(SGENERGY.DomainModels.Catalog.Product prod)
         => !string.IsNullOrWhiteSpace(prod.Slug) ? $"/san-pham/{prod.Slug}" : $"/Product/Detail?id={prod.ProductID}";
 }
