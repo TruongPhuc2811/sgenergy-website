@@ -28,24 +28,23 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Tìm kiếm và lấy danh sách loại hàng dưới dạng phân trang.
         /// </summary>
-        /// <param name="input">
-        /// Thông tin tìm kiếm và phân trang (từ khóa tìm kiếm, trang cần hiển thị, số dòng mỗi trang).
-        /// </param>
-        /// <returns>
-        /// Kết quả tìm kiếm dưới dạng danh sách loại hàng có phân trang.
-        /// </returns>
         public static async Task<PagedResult<Category>> ListCategoriesAsync(PaginationSearchInput input)
         {
             return await categoryDB.ListAsync(input);
         }
 
         /// <summary>
+        /// Lấy tất cả loại hàng đang hoạt động (không phân trang) — dùng cho bộ lọc sidebar.
+        /// </summary>
+        public static async Task<List<Category>> ListAllCategoriesAsync()
+        {
+            var result = await categoryDB.ListAsync(new PaginationSearchInput { PageSize = 0 });
+            return result.DataItems;
+        }
+
+        /// <summary>
         /// Lấy thông tin chi tiết của một loại hàng dựa vào mã loại hàng.
         /// </summary>
-        /// <param name="CategoryID">Mã loại hàng cần tìm.</param>
-        /// <returns>
-        /// Đối tượng Category nếu tìm thấy, ngược lại trả về null.
-        /// </returns>
         public static async Task<Category?> GetCategoryAsync(int CategoryID)
         {
             return await categoryDB.GetAsync(CategoryID);
@@ -54,8 +53,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Bổ sung một loại hàng mới vào hệ thống.
         /// </summary>
-        /// <param name="data">Thông tin loại hàng cần bổ sung.</param>
-        /// <returns>Mã loại hàng được tạo mới.</returns>
         public static async Task<int> AddCategoryAsync(Category data)
         {
             if (!ValidateCategoryData(data, true))
@@ -66,10 +63,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Cập nhật thông tin của một loại hàng.
         /// </summary>
-        /// <param name="data">Thông tin loại hàng cần cập nhật.</param>
-        /// <returns>
-        /// True nếu cập nhật thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> UpdateCategoryAsync(Category data)
         {
             if (!ValidateCategoryData(data, false))
@@ -80,11 +73,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Xóa một loại hàng dựa vào mã loại hàng.
         /// </summary>
-        /// <param name="CategoryID">Mã loại hàng cần xóa.</param>
-        /// <returns>
-        /// True nếu xóa thành công, False nếu loại hàng đang được sử dụng
-        /// hoặc việc xóa không thực hiện được.
-        /// </returns>
         public static async Task<bool> DeleteCategoryAsync(int CategoryID)
         {
             if (await categoryDB.IsUsedAsync(CategoryID))
@@ -96,10 +84,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Kiểm tra xem một loại hàng có đang được sử dụng trong dữ liệu hay không.
         /// </summary>
-        /// <param name="CategoryID">Mã loại hàng cần kiểm tra.</param>
-        /// <returns>
-        /// True nếu loại hàng đang được sử dụng, ngược lại False.
-        /// </returns>
         public static async Task<bool> IsUsedCategoryAsync(int CategoryID)
         {
             return await categoryDB.IsUsedAsync(CategoryID);
@@ -112,12 +96,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Tìm kiếm và lấy danh sách mặt hàng dưới dạng phân trang.
         /// </summary>
-        /// <param name="input">
-        /// Thông tin tìm kiếm và phân trang mặt hàng.
-        /// </param>
-        /// <returns>
-        /// Kết quả tìm kiếm dưới dạng danh sách mặt hàng có phân trang.
-        /// </returns>
         public static async Task<PagedResult<Product>> ListProductsAsync(ProductSearchInput input)
         {
             return await productDB.ListAsync(input);
@@ -126,20 +104,24 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Lấy thông tin chi tiết của một mặt hàng.
         /// </summary>
-        /// <param name="productID">Mã mặt hàng cần tìm.</param>
-        /// <returns>
-        /// Đối tượng Product nếu tìm thấy, ngược lại trả về null.
-        /// </returns>
         public static async Task<Product?> GetProductAsync(int productID)
         {
             return await productDB.GetAsync(productID);
         }
 
         /// <summary>
+        /// Lấy thông tin mặt hàng theo slug — dùng cho đường dẫn /san-pham/{slug}.
+        /// </summary>
+        public static async Task<Product?> GetProductBySlugAsync(string slug)
+        {
+            if (string.IsNullOrWhiteSpace(slug))
+                return null;
+            return await productDB.GetBySlugAsync(slug);
+        }
+
+        /// <summary>
         /// Bổ sung một mặt hàng mới vào hệ thống.
         /// </summary>
-        /// <param name="data">Thông tin mặt hàng cần bổ sung.</param>
-        /// <returns>Mã mặt hàng được tạo mới.</returns>
         public static async Task<int> AddProductAsync(Product data)
         {
             if (!ValidateProductData(data, true))
@@ -150,10 +132,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Cập nhật thông tin của một mặt hàng.
         /// </summary>
-        /// <param name="data">Thông tin mặt hàng cần cập nhật.</param>
-        /// <returns>
-        /// True nếu cập nhật thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> UpdateProductAsync(Product data)
         {
                if (!ValidateProductData(data, false))
@@ -164,11 +142,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Xóa một mặt hàng dựa vào mã mặt hàng.
         /// </summary>
-        /// <param name="productID">Mã mặt hàng cần xóa.</param>
-        /// <returns>
-        /// True nếu xóa thành công, False nếu mặt hàng đang được sử dụng
-        /// hoặc việc xóa không thực hiện được.
-        /// </returns>
         public static async Task<bool> DeleteProductAsync(int productID, string webRootPath)
         {
             if (await productDB.IsUsedAsync(productID))
@@ -183,14 +156,12 @@ namespace SGENERGY.BusinessLayers
             {
                 try
                 {
-                    // Xóa file vật lý của ảnh nếu tồn tại
                     var filePath = Path.Combine(webRootPath, "images", "products", photo);
                     if (File.Exists(filePath))
                         File.Delete(filePath);
                 }
                 catch
                 {
-                    // Log lỗi nếu cần thiết
                 }
             }
             return true;
@@ -199,10 +170,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Kiểm tra xem một mặt hàng có đang được sử dụng trong dữ liệu hay không.
         /// </summary>
-        /// <param name="productID">Mã mặt hàng cần kiểm tra.</param>
-        /// <returns>
-        /// True nếu mặt hàng đang được sử dụng, ngược lại False.
-        /// </returns>
         public static async Task<bool> IsUsedProductAsync(int productID)
         {
             return await productDB.IsUsedAsync(productID);
@@ -215,10 +182,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Lấy danh sách các thuộc tính của một mặt hàng.
         /// </summary>
-        /// <param name="productID">Mã mặt hàng.</param>
-        /// <returns>
-        /// Danh sách các thuộc tính của mặt hàng.
-        /// </returns>
         public static async Task<List<ProductAttribute>> ListAttributesAsync(int productID)
         {
             return await productDB.ListAttributesAsync(productID);
@@ -227,10 +190,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Lấy thông tin chi tiết của một thuộc tính của mặt hàng.
         /// </summary>
-        /// <param name="attributeID">Mã thuộc tính.</param>
-        /// <returns>
-        /// Đối tượng ProductAttribute nếu tìm thấy, ngược lại trả về null.
-        /// </returns>
         public static async Task<ProductAttribute?> GetAttributeAsync(long attributeID)
         {
             return await productDB.GetAttributeAsync(attributeID);
@@ -239,8 +198,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Bổ sung một thuộc tính mới cho mặt hàng.
         /// </summary>
-        /// <param name="data">Thông tin thuộc tính cần bổ sung.</param>
-        /// <returns>Mã thuộc tính được tạo mới.</returns>
         public static async Task<long> AddAttributeAsync(ProductAttribute data)
         {
             if (!ValidateProductAttributeData(data, true))
@@ -251,10 +208,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Cập nhật thông tin của một thuộc tính mặt hàng.
         /// </summary>
-        /// <param name="data">Thông tin thuộc tính cần cập nhật.</param>
-        /// <returns>
-        /// True nếu cập nhật thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> UpdateAttributeAsync(ProductAttribute data)
         {
             if (!ValidateProductAttributeData(data, false))
@@ -265,10 +218,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Xóa một thuộc tính của mặt hàng.
         /// </summary>
-        /// <param name="attributeID">Mã thuộc tính cần xóa.</param>
-        /// <returns>
-        /// True nếu xóa thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> DeleteAttributeAsync(long attributeID)
         {
             return await productDB.DeleteAttributeAsync(attributeID);
@@ -281,10 +230,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Lấy danh sách ảnh của một mặt hàng.
         /// </summary>
-        /// <param name="productID">Mã mặt hàng.</param>
-        /// <returns>
-        /// Danh sách ảnh của mặt hàng.
-        /// </returns>
         public static async Task<List<ProductPhoto>> ListPhotosAsync(int productID)
         {
             return await productDB.ListPhotosAsync(productID);
@@ -293,10 +238,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Lấy thông tin chi tiết của một ảnh của mặt hàng.
         /// </summary>
-        /// <param name="photoID">Mã ảnh.</param>
-        /// <returns>
-        /// Đối tượng ProductPhoto nếu tìm thấy, ngược lại trả về null.
-        /// </returns>
         public static async Task<ProductPhoto?> GetPhotoAsync(long photoID)
         {
             return await productDB.GetPhotoAsync(photoID);
@@ -305,8 +246,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Bổ sung một ảnh mới cho mặt hàng.
         /// </summary>
-        /// <param name="data">Thông tin ảnh cần bổ sung.</param>
-        /// <returns>Mã ảnh được tạo mới.</returns>
         public static async Task<long> AddPhotoAsync(ProductPhoto data)
         {
             if (!ValidateProductPhotoData(data, true))
@@ -317,10 +256,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Cập nhật thông tin của một ảnh mặt hàng.
         /// </summary>
-        /// <param name="data">Thông tin ảnh cần cập nhật.</param>
-        /// <returns>
-        /// True nếu cập nhật thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> UpdatePhotoAsync(ProductPhoto data)
         {
             if (!ValidateProductPhotoData(data, false))
@@ -331,10 +266,6 @@ namespace SGENERGY.BusinessLayers
         /// <summary>
         /// Xóa một ảnh của mặt hàng.
         /// </summary>
-        /// <param name="photoID">Mã ảnh cần xóa.</param>
-        /// <returns>
-        /// True nếu xóa thành công, ngược lại False.
-        /// </returns>
         public static async Task<bool> DeletePhotoAsync(long photoID)
         {
             return await productDB.DeletePhotoAsync(photoID);
@@ -343,13 +274,6 @@ namespace SGENERGY.BusinessLayers
         #endregion
 
         #region Validation
-        /// <summary>
-        /// Kiểm tra tính hợp lệ của dữ liệu loại hàng trước khi thực hiện
-        /// các thao tác thêm mới hoặc cập nhật.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="isNew"></param>
-        /// <returns></returns>
         private static bool ValidateCategoryData(Category data, bool isNew)
         {
             if (data == null)
@@ -363,13 +287,7 @@ namespace SGENERGY.BusinessLayers
 
             return true;
         }
-        /// <summary>
-        /// Kiểm tra tính hợp lệ của dữ liệu mặt hàng trước khi thực hiện
-        /// các thao tác thêm mới hoặc cập nhật.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="isNew"></param>
-        /// <returns></returns>
+
         private static bool ValidateProductData(Product data, bool isNew)
         {
             if (data == null)
@@ -395,13 +313,7 @@ namespace SGENERGY.BusinessLayers
 
             return true;
         }
-        /// <summary>
-        /// Kiểm tra tính hợp lệ của dữ liệu thuộc tính mặt hàng trước khi 
-        /// thực hiện các thao tác thêm mới hoặc cập nhật.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="isNew"></param>
-        /// <returns></returns>
+
         private static bool ValidateProductAttributeData(ProductAttribute data, bool isNew)
         {
             if (data == null)
@@ -422,13 +334,7 @@ namespace SGENERGY.BusinessLayers
 
             return true;
         }
-        /// <summary>
-        /// Kiểm tra tính hợp lệ của dữ liệu ảnh mặt hàng trước khi thực
-        /// hiện các thao tác thêm mới hoặc cập nhật.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="isNew"></param>
-        /// <returns></returns>
+
         private static bool ValidateProductPhotoData(ProductPhoto data, bool isNew)
         {
             if (data == null)

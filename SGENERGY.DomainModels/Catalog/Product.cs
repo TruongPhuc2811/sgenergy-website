@@ -41,5 +41,9 @@
         /// Mặt hàng hiện có đang được bán hay không?
         /// </summary>
         public bool IsSelling { get; set; }
+        /// <summary>
+        /// Slug thân thiện với URL (dùng cho đường dẫn /san-pham/{slug})
+        /// </summary>
+        public string? Slug { get; set; }
     }
 }

@@ -44,6 +44,12 @@ namespace SGENERGY.DataLayers.Interfaces
         /// <param name="productID"></param>
         /// <returns></returns>
         Task<bool> IsUsedAsync(int productID);
+        /// <summary>
+        /// Lấy thông tin 1 mặt hàng theo slug
+        /// </summary>
+        /// <param name="slug">Slug của mặt hàng</param>
+        /// <returns></returns>
+        Task<Product?> GetBySlugAsync(string slug);
 
         /// <summary>
         /// Lấy danh sách thuộc tính của mặt hàng

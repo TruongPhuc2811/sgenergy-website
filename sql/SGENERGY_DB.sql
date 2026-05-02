@@ -63,6 +63,7 @@ CREATE TABLE dbo.Products (
     Unit                 NVARCHAR(50) NOT NULL CONSTRAINT DF_Products_Unit DEFAULT(N''),
     Price                DECIMAL(18,2) NOT NULL CONSTRAINT DF_Products_Price DEFAULT(0),
     Photo                NVARCHAR(500) NULL,
+    Slug                 NVARCHAR(255) NULL,
     IsSelling            BIT NOT NULL CONSTRAINT DF_Products_IsSelling DEFAULT(1),
 
     CONSTRAINT FK_Products_Categories
@@ -77,6 +78,8 @@ GO
 CREATE INDEX IX_Products_CategoryID ON dbo.Products(CategoryID)
 GO
 CREATE INDEX IX_Products_SupplierID ON dbo.Products(SupplierID)
+GO
+CREATE UNIQUE INDEX UX_Products_Slug ON dbo.Products(Slug) WHERE Slug IS NOT NULL
 GO
 
 
