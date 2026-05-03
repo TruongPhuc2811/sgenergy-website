@@ -9,7 +9,7 @@ namespace SGENERGY.DataLayers.SQLServer
     /// <summary>
     /// Cài đặt các phép xử lý dữ liệu cho nhà cung cấp sử dụng SQL Server
     /// </summary>
-    public class SupplierRepository : IGenericRepository<Supplier>
+    public class SupplierRepository : ISupplierRepository
     {
         private readonly string _connectionString;
 
@@ -70,14 +70,41 @@ namespace SGENERGY.DataLayers.SQLServer
             return await connection.QueryFirstOrDefaultAsync<Supplier>(sql, new { SupplierID = id });
         }
 
+        /// <summary>
+        /// Lấy thông tin nhà cung cấp theo slug (case-insensitive)
+        /// </summary>
+        public async Task<Supplier?> GetBySlugAsync(string slug)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = "SELECT * FROM Suppliers WHERE LOWER(Slug) = LOWER(@Slug)";
+            return await connection.QueryFirstOrDefaultAsync<Supplier>(sql, new { Slug = slug });
+        }
+
+        /// <summary>
+        /// Kiểm tra slug nhà cung cấp đã tồn tại chưa
+        /// </summary>
+        public async Task<bool> SlugExistsAsync(string slug, int excludeSupplierID = 0)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = @"SELECT COUNT(*) FROM Suppliers
+                           WHERE LOWER(Slug) = LOWER(@Slug)
+                             AND SupplierID <> @ExcludeID";
+            int count = await connection.ExecuteScalarAsync<int>(sql, new { Slug = slug, ExcludeID = excludeSupplierID });
+            return count > 0;
+        }
+
         public async Task<int> AddAsync(Supplier data)
         {
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
             string sql = @"
-                INSERT INTO Suppliers(SupplierName, ContactName, Province, Address, Phone, Email)
-                VALUES (@SupplierName, @ContactName, @Province, @Address, @Phone, @Email);
+                INSERT INTO Suppliers(SupplierName, ContactName, Province, Address, Phone, Email, Slug)
+                VALUES (@SupplierName, @ContactName, @Province, @Address, @Phone, @Email, @Slug);
                 SELECT SCOPE_IDENTITY();";
 
             return await connection.ExecuteScalarAsync<int>(sql, new
@@ -87,7 +114,8 @@ namespace SGENERGY.DataLayers.SQLServer
                 data.Province,
                 data.Address,
                 data.Phone,
-                data.Email
+                data.Email,
+                data.Slug
             });
         }
 
@@ -103,7 +131,8 @@ namespace SGENERGY.DataLayers.SQLServer
                     Province     = @Province,
                     Address      = @Address,
                     Phone        = @Phone,
-                    Email        = @Email
+                    Email        = @Email,
+                    Slug         = @Slug
                 WHERE SupplierID = @SupplierID";
 
             int rowsAffected = await connection.ExecuteAsync(sql, new
@@ -114,6 +143,7 @@ namespace SGENERGY.DataLayers.SQLServer
                 data.Address,
                 data.Phone,
                 data.Email,
+                data.Slug,
                 data.SupplierID
             });
 

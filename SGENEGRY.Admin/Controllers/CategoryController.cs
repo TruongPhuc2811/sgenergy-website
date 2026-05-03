@@ -84,6 +84,9 @@ namespace SGENERGY.Admin.Controllers
 
                 if (!ModelState.IsValid)
                     return View("Edit", data);
+                // Auto-generate slug nếu chưa có
+                if (string.IsNullOrWhiteSpace(data.Slug))
+                    data.Slug = await CatalogDataService.GetUniqueCategorySlugAsync(data.CategoryName, data.CategoryID);
                 //Yêu cầu lưu dữ liệu vào CSDL
                 if (data.CategoryID == 0)
                 {

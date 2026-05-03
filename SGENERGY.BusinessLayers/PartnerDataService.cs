@@ -10,7 +10,7 @@ using SGENERGY.DomainModels.Partner;
 /// </summary>
 public static class PartnerDataService
 {
-    private static readonly IGenericRepository<Supplier> supplierDB;
+    private static readonly ISupplierRepository supplierDB;
     private static readonly ICustomerRepository customerDB;
     private static readonly IGenericRepository<Shipper> shipperDB;
 
@@ -50,6 +50,33 @@ public static class PartnerDataService
     public static async Task<Supplier?> GetSupplierAsync(int supplierID)
     {
         return await supplierDB.GetAsync(supplierID);
+    }
+
+    /// <summary>
+    /// Lấy thông tin nhà cung cấp theo slug (case-insensitive).
+    /// </summary>
+    public static async Task<Supplier?> GetSupplierBySlugAsync(string slug)
+    {
+        return await supplierDB.GetBySlugAsync(slug);
+    }
+
+    /// <summary>
+    /// Lấy danh sách tất cả nhà cung cấp (không phân trang) để hiển thị trên sidebar.
+    /// </summary>
+    public static async Task<List<Supplier>> ListAllSuppliersAsync()
+    {
+        var result = await supplierDB.ListAsync(new PaginationSearchInput { PageSize = 0, SearchValue = "" });
+        return result.DataItems;
+    }
+
+    /// <summary>
+    /// Trả về slug duy nhất cho nhà cung cấp (tự động thêm hậu tố -1, -2… nếu trùng).
+    /// </summary>
+    public static async Task<string> GetUniqueSupplierSlugAsync(string baseName, int excludeSupplierID = 0)
+    {
+        var baseSlug = SlugHelper.GenerateSlug(baseName);
+        return await SlugHelper.MakeUniqueAsync(baseSlug,
+            slug => supplierDB.SlugExistsAsync(slug, excludeSupplierID));
     }
 
     /// <summary>

@@ -1,100 +1,104 @@
-﻿@model SGENERGY.Website.Models.ProductListVm
+﻿@using SGENERGY.DomainModels.Catalog
+@using SGENERGY.DomainModels.Partner
+@model SGENERGY.DomainModels.Common.PagedResult<Product>
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = "Sản phẩm";
+    var allCategories  = ViewBag.AllCategories  as List<Category>  ?? new List<Category>();
+    var allSuppliers   = ViewBag.AllSuppliers   as List<Supplier>  ?? new List<Supplier>();
+    var currentCat     = ViewBag.CurrentCategory as Category;
+    var currentSup     = ViewBag.CurrentSupplier as Supplier;
+    var q              = (string?)ViewBag.Q ?? "";
+    var categorySlug   = (string?)ViewBag.CategorySlug ?? "";
+    var supplierSlug   = (string?)ViewBag.SupplierSlug ?? "";
+
+    string PageUrl(int p)
+    {
+        var qs = new System.Text.StringBuilder("?page=");
+        qs.Append(p);
+        if (!string.IsNullOrWhiteSpace(q)) qs.Append($"&q={Uri.EscapeDataString(q)}");
+
+        if (!string.IsNullOrWhiteSpace(categorySlug))
+            return $"/san-pham/loai-hang/{categorySlug}{qs}";
+        if (!string.IsNullOrWhiteSpace(supplierSlug))
+            return $"/san-pham/hang/{supplierSlug}{qs}";
+        return $"/san-pham{qs}";
+    }
+
+    string pageTitle = currentCat != null ? currentCat.CategoryName
+                     : currentSup != null ? currentSup.SupplierName
+                     : (!string.IsNullOrWhiteSpace(q) ? $"Tìm kiếm: {q}" : "Tất cả sản phẩm");
 }
-@await Html.PartialAsync("_PageHero", new PageHeroVm {
-Title = "SẢN PHẨM",
+
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "SẢN PHẨM",
     BreadcrumbText = "Sản phẩm",
     BackgroundImageUrl = "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=2000&q=70"
 })
+
 <section class="product-page">
     <div class="container product-page__container">
 
         <!-- SIDEBAR -->
         <aside class="product-sidebar" data-aos="fade-right">
 
+            <!-- Ô tìm kiếm -->
+            <div class="sidebar-block is-open" style="margin-bottom:1rem;">
+                <button class="sidebar-block__header js-accordion-btn" type="button">
+                    <div class="sidebar-block__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <span class="sidebar-block__title">TÌM KIẾM</span>
+                    <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+                </button>
+                <div class="sidebar-block__body js-accordion-body">
+                    <form method="get" action="/san-pham">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Nhập từ khóa…" value="@q" />
+                            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Loại hàng -->
             <div class="sidebar-block js-accordion is-open">
                 <button class="sidebar-block__header js-accordion-btn" type="button">
-                    <div class="sidebar-block__icon">
-                        <i class="fa-solid fa-list"></i>
-                    </div>
+                    <div class="sidebar-block__icon"><i class="fa-solid fa-list"></i></div>
                     <span class="sidebar-block__title">DANH MỤC SẢN PHẨM</span>
                     <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
                 </button>
-
                 <div class="sidebar-block__body js-accordion-body">
-                    @foreach (var c in Model.Categories)
+                    <a class="sidebar-link @(currentCat == null && currentSup == null && string.IsNullOrWhiteSpace(q) ? "is-active" : "")" href="/san-pham">
+                        <span class="sidebar-link__icon"><i class="fa-solid fa-angle-right"></i></span>
+                        <span class="sidebar-link__text">Tất cả sản phẩm</span>
+                    </a>
+                    @foreach (var cat in allCategories)
                     {
-                        <a class="sidebar-link @(c.IsActive ? "is-active" : "")" href="@c.Url">
+                        bool active = currentCat?.CategoryID == cat.CategoryID;
+                        <a class="sidebar-link @(active ? "is-active" : "")"
+                           href="/san-pham/loai-hang/@(cat.Slug ?? cat.CategoryID.ToString())">
                             <span class="sidebar-link__icon"><i class="fa-solid fa-angle-right"></i></span>
-                            <span class="sidebar-link__text">@c.Name</span>
-                            @if (c.IsActive)
-                            {
-                                <span class="sidebar-link__badge"><i class="fa-solid fa-check"></i></span>
-                            }
+                            <span class="sidebar-link__text">@cat.CategoryName</span>
+                            @if (active) { <span class="sidebar-link__badge"><i class="fa-solid fa-check"></i></span> }
                         </a>
                     }
                 </div>
             </div>
 
+            <!-- Nhà cung cấp -->
             <div class="sidebar-block js-accordion is-open">
                 <button class="sidebar-block__header js-accordion-btn" type="button">
-                    <div class="sidebar-block__icon">
-                        <i class="fa-solid fa-filter"></i>
-                    </div>
-                    <span class="sidebar-block__title">LỌC SẢN PHẨM</span>
+                    <div class="sidebar-block__icon"><i class="fa-solid fa-building"></i></div>
+                    <span class="sidebar-block__title">THƯƠNG HIỆU / NHÀ CUNG CẤP</span>
                     <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
                 </button>
-
                 <div class="sidebar-block__body js-accordion-body">
-                    <div class="filter-row">
-                        <button class="filter-row__btn" type="button">
-                            <i class="fa-solid fa-bolt"></i>
-                            <span>Công suất</span>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <div class="filter-row">
-                        <button class="filter-row__btn" type="button">
-                            <i class="fa-solid fa-building"></i>
-                            <span>Thương hiệu</span>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <div class="filter-row">
-                        <button class="filter-row__btn" type="button">
-                            <i class="fa-solid fa-layer-group"></i>
-                            <span>Chủng loại</span>
-                            <i class="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-block js-accordion is-open">
-                <button class="sidebar-block__header js-accordion-btn" type="button">
-                    <div class="sidebar-block__icon">
-                        <i class="fa-solid fa-sparkles"></i>
-                    </div>
-                    <span class="sidebar-block__title">SẢN PHẨM MỚI</span>
-                    <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
-                </button>
-
-                <div class="sidebar-block__body js-accordion-body sidebar-new">
-                    @foreach (var p in Model.NewProducts)
+                    @foreach (var sup in allSuppliers)
                     {
-                        <a class="sidebar-new__item" href="@p.DetailUrl">
-                            <div class="sidebar-new__image">
-                                <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" referrerpolicy="no-referrer" />
-                                <span class="sidebar-new__badge">Mới</span>
-                            </div>
-                            <div class="sidebar-new__meta">
-                                <div class="sidebar-new__name">@p.Name</div>
-                                <div class="sidebar-new__more">
-                                    <span>Xem chi tiết</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
+                        bool active = currentSup?.SupplierID == sup.SupplierID;
+                        <a class="sidebar-link @(active ? "is-active" : "")"
+                           href="/san-pham/hang/@(sup.Slug ?? sup.SupplierID.ToString())">
+                            <span class="sidebar-link__icon"><i class="fa-solid fa-angle-right"></i></span>
+                            <span class="sidebar-link__text">@sup.SupplierName</span>
+                            @if (active) { <span class="sidebar-link__badge"><i class="fa-solid fa-check"></i></span> }
                         </a>
                     }
                 </div>
@@ -106,27 +110,18 @@ Title = "SẢN PHẨM",
         <main class="product-main" id="productMain" data-aos="fade-left">
             <div class="product-main__top">
                 <div class="product-header">
-                    <h1 class="product-title">@Model.Title</h1>
+                    <h1 class="product-title">@pageTitle</h1>
                     <p class="product-count">
                         <i class="fa-solid fa-box"></i>
-                        Hiển thị <strong>@Model.Products.Count()</strong> sản phẩm
+                        Tìm thấy <strong>@Model.RowCount</strong> sản phẩm
+                        @if (Model.PageCount > 1)
+                        {
+                            <span>&nbsp;— trang @Model.Page / @Model.PageCount</span>
+                        }
                     </p>
                 </div>
 
                 <div class="product-toolbar">
-                    <div class="product-toolbar__group">
-                        <label for="sortSelect" class="toolbar-label">
-                            <i class="fa-solid fa-sort"></i>
-                            Sắp xếp:
-                        </label>
-                        <select id="sortSelect" class="product-toolbar__select" aria-label="Sắp xếp">
-                            <option>Mới nhất</option>
-                            <option>Phổ biến nhất</option>
-                            <option>Giá tăng dần</option>
-                            <option>Giá giảm dần</option>
-                        </select>
-                    </div>
-
                     <div class="product-toolbar__group">
                         <label class="toolbar-label">
                             <i class="fa-solid fa-eye"></i>
@@ -144,81 +139,94 @@ Title = "SẢN PHẨM",
                 </div>
             </div>
 
-            <div class="product-grid js-product-grid" data-view="grid">
-                @foreach (var p in Model.Products)
+            @if (!Model.DataItems.Any())
+            {
+                <div class="alert alert-info mt-3">
+                    <i class="fa-solid fa-circle-info me-2"></i>
+                    Không tìm thấy sản phẩm nào phù hợp.
+                </div>
+            }
+            else
+            {
+                <div class="product-grid js-product-grid" data-view="grid">
+                    @foreach (var p in Model.DataItems)
+                    {
+                        var detailUrl = $"/san-pham/{(string.IsNullOrWhiteSpace(p.Slug) ? p.ProductID.ToString() : p.Slug)}";
+                        var imgSrc    = string.IsNullOrWhiteSpace(p.Photo) || p.Photo == "nophoto.png"
+                                        ? "/images/products/nophoto.png"
+                                        : $"/images/products/{p.Photo}";
+                        <article class="product-card">
+                            <a class="product-card__img" href="@detailUrl">
+                                <img src="@imgSrc"
+                                     alt="@p.ProductName"
+                                     loading="lazy"
+                                     onerror="this.src='/images/products/nophoto.png'" />
+                                <div class="product-card__overlay">
+                                    <div class="product-card__actions">
+                                        <button class="product-action" title="Xem nhanh">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="product-card__content">
+                                <h3 class="product-card__name">
+                                    <a href="@detailUrl">@p.ProductName</a>
+                                </h3>
+                                @if (!string.IsNullOrWhiteSpace(p.ProductDescription))
+                                {
+                                    <p class="product-card__desc">
+                                        @(p.ProductDescription!.Length > 80
+                                            ? p.ProductDescription.Substring(0, 80) + "…"
+                                            : p.ProductDescription)
+                                    </p>
+                                }
+                                <div class="product-card__footer">
+                                    <a class="product-card__btn" href="@detailUrl">
+                                        <span>Xem chi tiết</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+
+                <!-- Phân trang -->
+                @if (Model.PageCount > 1)
                 {
-                    <article class="product-card">
-                        <a class="product-card__img" href="@p.DetailUrl">
-                            @if (!string.IsNullOrWhiteSpace(p.BadgeText))
+                    <nav class="pagination" aria-label="Phân trang">
+                        @if (Model.HasPreviousPage)
+                        {
+                            <a class="page-btn page-btn--prev" href="@PageUrl(Model.Page - 1)" aria-label="Trang trước">
+                                <i class="fa-solid fa-chevron-left"></i><span>Trước</span>
+                            </a>
+                        }
+                        @foreach (var pg in Model.GetDisplayPages())
+                        {
+                            if (pg.IsEllipsis)
                             {
-                                <span class="product-badge product-badge--special">@p.BadgeText</span>
+                                <span class="page-dots">…</span>
                             }
-                            <img src="@p.ImageUrl"
-                                 alt="@p.Name"
-                                 loading="lazy"
-                                 referrerpolicy="no-referrer" />
-                            <div class="product-card__overlay">
-                                <div class="product-card__actions">
-                                    <button class="product-action" title="Thêm vào yêu thích">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                    <button class="product-action" title="Xem nhanh">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-                                    <button class="product-action" title="So sánh">
-                                        <i class="fa-solid fa-code-compare"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="product-card__content">
-                            <h3 class="product-card__name">
-                                <a href="@p.DetailUrl">@p.Name</a>
-                            </h3>
-                            
-                            <div class="product-card__rating">
-                                <div class="rating-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                </div>
-                                <span class="rating-count">(4.5)</span>
-                            </div>
-
-                            <div class="product-card__footer">
-                                <a class="product-card__btn" href="@p.DetailUrl">
-                                    <span>Xem chi tiết</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
+                            else
+                            {
+                                <a class="page-btn @(pg.IsCurrent ? "is-active" : "")"
+                                   href="@PageUrl(pg.Page)">@pg.Page</a>
+                            }
+                        }
+                        @if (Model.HasNextPage)
+                        {
+                            <a class="page-btn page-btn--next" href="@PageUrl(Model.Page + 1)" aria-label="Trang sau">
+                                <span>Sau</span><i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        }
+                    </nav>
                 }
-            </div>
-
-            <nav class="pagination" aria-label="Pagination">
-                <a class="page-btn page-btn--prev" href="#" aria-label="Previous">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    <span>Trước</span>
-                </a>
-                <a class="page-btn is-active" href="#">1</a>
-                <a class="page-btn" href="#">2</a>
-                <a class="page-btn" href="#">3</a>
-                <span class="page-dots">…</span>
-                <a class="page-btn" href="#">10</a>
-                <a class="page-btn page-btn--next" href="#" aria-label="Next">
-                    <span>Sau</span>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </a>
-            </nav>
+            }
         </main>
     </div>
 </section>
 
 @section Scripts {
-    <script src="~/js/products.js" asp-append-version="true"></script>
-
+    <script src="~/js/Product.js" asp-append-version="true"></script>
 }

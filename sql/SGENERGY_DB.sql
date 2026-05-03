@@ -23,10 +23,13 @@ GO
 CREATE TABLE dbo.Categories (
     CategoryID       INT IDENTITY(1,1) PRIMARY KEY,
     CategoryName     NVARCHAR(255) NOT NULL,
-    Description      NVARCHAR(1000) NULL
+    Description      NVARCHAR(1000) NULL,
+    Slug             NVARCHAR(300) NULL
 )
 GO
 CREATE UNIQUE INDEX UX_Categories_CategoryName ON dbo.Categories(CategoryName)
+GO
+CREATE UNIQUE INDEX UX_Categories_Slug ON dbo.Categories(Slug) WHERE Slug IS NOT NULL
 GO
 
 
@@ -42,10 +45,13 @@ CREATE TABLE dbo.Suppliers (
     Province         NVARCHAR(100) NULL,
     Address          NVARCHAR(500) NULL,
     Phone            NVARCHAR(50) NULL,
-    Email            NVARCHAR(255) NULL
+    Email            NVARCHAR(255) NULL,
+    Slug             NVARCHAR(300) NULL
 )
 GO
 CREATE UNIQUE INDEX UX_Suppliers_SupplierName ON dbo.Suppliers(SupplierName)
+GO
+CREATE UNIQUE INDEX UX_Suppliers_Slug ON dbo.Suppliers(Slug) WHERE Slug IS NOT NULL
 GO
 
 
@@ -64,6 +70,7 @@ CREATE TABLE dbo.Products (
     Price                DECIMAL(18,2) NOT NULL CONSTRAINT DF_Products_Price DEFAULT(0),
     Photo                NVARCHAR(500) NULL,
     IsSelling            BIT NOT NULL CONSTRAINT DF_Products_IsSelling DEFAULT(1),
+    Slug                 NVARCHAR(300) NULL,
 
     CONSTRAINT FK_Products_Categories
         FOREIGN KEY (CategoryID) REFERENCES dbo.Categories(CategoryID)
@@ -77,6 +84,8 @@ GO
 CREATE INDEX IX_Products_CategoryID ON dbo.Products(CategoryID)
 GO
 CREATE INDEX IX_Products_SupplierID ON dbo.Products(SupplierID)
+GO
+CREATE UNIQUE INDEX UX_Products_Slug ON dbo.Products(Slug) WHERE Slug IS NOT NULL
 GO
 
 
@@ -213,18 +222,19 @@ GO
 -- ============================================================
 
 -- Loại hàng
-INSERT INTO dbo.Categories(CategoryName, Description) VALUES
-    (N'Điện mặt trời áp mái', N'Hệ thống điện mặt trời lắp đặt trên mái nhà'),
-    (N'Điện mặt trời mặt đất', N'Hệ thống điện mặt trời lắp đặt trên mặt đất'),
-    (N'Hệ thống lưu trữ năng lượng', N'Pin lưu trữ và hệ thống ESS'),
-    (N'Phụ kiện & Thiết bị', N'Inverter, mounting, cáp và phụ kiện')
+INSERT INTO dbo.Categories(CategoryName, Description, Slug) VALUES
+    (N'Điện mặt trời áp mái', N'Hệ thống điện mặt trời lắp đặt trên mái nhà', N'dien-mat-troi-ap-mai'),
+    (N'Điện mặt trời mặt đất', N'Hệ thống điện mặt trời lắp đặt trên mặt đất', N'dien-mat-troi-mat-dat'),
+    (N'Hệ thống lưu trữ năng lượng', N'Pin lưu trữ và hệ thống ESS', N'he-thong-luu-tru-nang-luong'),
+    (N'Phụ kiện & Thiết bị', N'Inverter, mounting, cáp và phụ kiện', N'phu-kien-thiet-bi')
 GO
 
 -- Nhà cung cấp / Hãng sản xuất
-INSERT INTO dbo.Suppliers(SupplierName, ContactName, Phone, Email) VALUES
-    (N'LONGi Solar', N'Bộ phận kinh doanh', N'02812345678', N'sales@longi.com'),
-    (N'JA Solar', N'Bộ phận kinh doanh', N'02812345679', N'sales@jasolar.com'),
-    (N'SolarEdge', N'Bộ phận kinh doanh', N'02812345680', N'sales@solaredge.com'),
-    (N'Growatt', N'Bộ phận kinh doanh', N'02812345681', N'sales@growatt.com'),
-    (N'Fronius', N'Bộ phận kinh doanh', N'02812345682', N'sales@fronius.com')
+INSERT INTO dbo.Suppliers(SupplierName, ContactName, Phone, Email, Slug) VALUES
+    (N'LONGi Solar', N'Bộ phận kinh doanh', N'02812345678', N'sales@longi.com', N'longi-solar'),
+    (N'JA Solar', N'Bộ phận kinh doanh', N'02812345679', N'sales@jasolar.com', N'ja-solar'),
+    (N'SolarEdge', N'Bộ phận kinh doanh', N'02812345680', N'sales@solaredge.com', N'solaredge'),
+    (N'Growatt', N'Bộ phận kinh doanh', N'02812345681', N'sales@growatt.com', N'growatt'),
+    (N'Fronius', N'Bộ phận kinh doanh', N'02812345682', N'sales@fronius.com', N'fronius')
 GO
+

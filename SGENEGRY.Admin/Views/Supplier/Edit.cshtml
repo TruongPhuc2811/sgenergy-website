@@ -70,6 +70,13 @@
                         </select>
                         <span class="text-danger" asp-validation-for="Province"></span>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Slug SEO</label>
+                        <input type="text" asp-for="Slug" class="form-control"
+                               placeholder="Để trống → tự động tạo từ tên nhà cung cấp" />
+                        <small class="text-muted">Dùng cho URL: /san-pham/hang/<em>slug</em></small>
+                    </div>
                 </form>
             </div>
         </div>

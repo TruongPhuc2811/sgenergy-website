@@ -17,5 +17,9 @@
         /// Mô tả loại hàng
         /// </summary>
         public string? Description { get; set; }
+        /// <summary>
+        /// Slug SEO của loại hàng (ví dụ: dien-mat-troi-ap-mai)
+        /// </summary>
+        public string? Slug { get; set; }
     }
 }

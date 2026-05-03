@@ -41,5 +41,9 @@
         /// Mặt hàng hiện có đang được bán hay không?
         /// </summary>
         public bool IsSelling { get; set; }
+        /// <summary>
+        /// Slug SEO của mặt hàng (ví dụ: tam-pin-nang-luong-mat-troi-longi-570wp)
+        /// </summary>
+        public string? Slug { get; set; }
     }
 }
