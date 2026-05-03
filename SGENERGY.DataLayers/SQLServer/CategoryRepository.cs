@@ -9,7 +9,7 @@ namespace SGENERGY.DataLayers.SQLServer
     /// <summary>
     /// Cài đặt các phép xử lý dữ liệu cho loại hàng sử dụng SQL Server
     /// </summary>
-    public class CategoryRepository : IGenericRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly string _connectionString;
 
@@ -70,20 +70,48 @@ namespace SGENERGY.DataLayers.SQLServer
             return await connection.QueryFirstOrDefaultAsync<Category>(sql, new { CategoryID = id });
         }
 
+        /// <summary>
+        /// Lấy thông tin loại hàng theo slug (case-insensitive)
+        /// </summary>
+        public async Task<Category?> GetBySlugAsync(string slug)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = "SELECT * FROM Categories WHERE LOWER(Slug) = LOWER(@Slug)";
+            return await connection.QueryFirstOrDefaultAsync<Category>(sql, new { Slug = slug });
+        }
+
+        /// <summary>
+        /// Kiểm tra slug loại hàng đã tồn tại chưa
+        /// </summary>
+        public async Task<bool> SlugExistsAsync(string slug, int excludeCategoryID = 0)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = @"SELECT COUNT(*) FROM Categories
+                           WHERE LOWER(Slug) = LOWER(@Slug)
+                             AND CategoryID <> @ExcludeID";
+            int count = await connection.ExecuteScalarAsync<int>(sql, new { Slug = slug, ExcludeID = excludeCategoryID });
+            return count > 0;
+        }
+
         public async Task<int> AddAsync(Category data)
         {
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
             string sql = @"
-                INSERT INTO Categories(CategoryName, Description)
-                VALUES (@CategoryName, @Description);
+                INSERT INTO Categories(CategoryName, Description, Slug)
+                VALUES (@CategoryName, @Description, @Slug);
                 SELECT SCOPE_IDENTITY();";
 
             return await connection.ExecuteScalarAsync<int>(sql, new
             {
                 data.CategoryName,
-                data.Description
+                data.Description,
+                data.Slug
             });
         }
 
@@ -95,13 +123,15 @@ namespace SGENERGY.DataLayers.SQLServer
             string sql = @"
                 UPDATE Categories
                 SET CategoryName = @CategoryName,
-                    Description  = @Description
+                    Description  = @Description,
+                    Slug         = @Slug
                 WHERE CategoryID = @CategoryID";
 
             int rowsAffected = await connection.ExecuteAsync(sql, new
             {
                 data.CategoryName,
                 data.Description,
+                data.Slug,
                 data.CategoryID
             });
 

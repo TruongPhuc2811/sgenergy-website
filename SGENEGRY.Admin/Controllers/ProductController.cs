@@ -131,6 +131,9 @@ namespace SGENERGY.Admin.Controllers
                 if (string.IsNullOrEmpty(data.ProductDescription)) data.ProductDescription = "";
                 if (string.IsNullOrEmpty(data.Unit)) data.Unit = "";
                 if (string.IsNullOrEmpty(data.Photo)) data.Photo = "nophoto.png";
+                // Auto-generate slug nếu chưa có hoặc tên thay đổi (slug sẽ được chuẩn hóa và unique)
+                if (string.IsNullOrWhiteSpace(data.Slug))
+                    data.Slug = await CatalogDataService.GetUniqueProductSlugAsync(data.ProductName, data.ProductID);
                 //Lưu dữ liệu vào database (bổ sung hoặc cập nhật)
                 if (data.ProductID == 0)
                 {

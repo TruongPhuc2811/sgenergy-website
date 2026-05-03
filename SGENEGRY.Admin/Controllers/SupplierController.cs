@@ -102,6 +102,10 @@ namespace SGENERGY.Admin.Controllers
                 if (!ModelState.IsValid)
                     return View("Edit", data);
 
+                // Auto-generate slug nếu chưa có
+                if (string.IsNullOrWhiteSpace(data.Slug))
+                    data.Slug = await PartnerDataService.GetUniqueSupplierSlugAsync(data.SupplierName, data.SupplierID);
+
                 if (data.SupplierID == 0)
                 {
                     await PartnerDataService.AddSupplierAsync(data);

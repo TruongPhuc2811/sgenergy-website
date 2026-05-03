@@ -12,7 +12,7 @@ namespace SGENERGY.BusinessLayers
     public static class CatalogDataService
     {
         private static readonly IProductRepository productDB;
-        private static readonly IGenericRepository<Category> categoryDB;
+        private static readonly ICategoryRepository categoryDB;
 
         /// <summary>
         /// Constructor
@@ -49,6 +49,33 @@ namespace SGENERGY.BusinessLayers
         public static async Task<Category?> GetCategoryAsync(int CategoryID)
         {
             return await categoryDB.GetAsync(CategoryID);
+        }
+
+        /// <summary>
+        /// Lấy thông tin loại hàng theo slug (case-insensitive).
+        /// </summary>
+        public static async Task<Category?> GetCategoryBySlugAsync(string slug)
+        {
+            return await categoryDB.GetBySlugAsync(slug);
+        }
+
+        /// <summary>
+        /// Lấy danh sách tất cả loại hàng (không phân trang) để hiển thị trên sidebar.
+        /// </summary>
+        public static async Task<List<Category>> ListAllCategoriesAsync()
+        {
+            var result = await categoryDB.ListAsync(new PaginationSearchInput { PageSize = 0, SearchValue = "" });
+            return result.DataItems;
+        }
+
+        /// <summary>
+        /// Trả về slug duy nhất cho loại hàng (tự động thêm hậu tố -1, -2… nếu trùng).
+        /// </summary>
+        public static async Task<string> GetUniqueCategorySlugAsync(string baseName, int excludeCategoryID = 0)
+        {
+            var baseSlug = SlugHelper.GenerateSlug(baseName);
+            return await SlugHelper.MakeUniqueAsync(baseSlug,
+                slug => categoryDB.SlugExistsAsync(slug, excludeCategoryID));
         }
 
         /// <summary>
@@ -133,6 +160,24 @@ namespace SGENERGY.BusinessLayers
         public static async Task<Product?> GetProductAsync(int productID)
         {
             return await productDB.GetAsync(productID);
+        }
+
+        /// <summary>
+        /// Lấy thông tin mặt hàng theo slug (case-insensitive).
+        /// </summary>
+        public static async Task<Product?> GetProductBySlugAsync(string slug)
+        {
+            return await productDB.GetBySlugAsync(slug);
+        }
+
+        /// <summary>
+        /// Trả về slug duy nhất cho mặt hàng (tự động thêm hậu tố -1, -2… nếu trùng).
+        /// </summary>
+        public static async Task<string> GetUniqueProductSlugAsync(string baseName, int excludeProductID = 0)
+        {
+            var baseSlug = SlugHelper.GenerateSlug(baseName);
+            return await SlugHelper.MakeUniqueAsync(baseSlug,
+                slug => productDB.SlugExistsAsync(slug, excludeProductID));
         }
 
         /// <summary>

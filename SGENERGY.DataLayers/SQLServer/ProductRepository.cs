@@ -95,6 +95,33 @@ namespace SGENERGY.DataLayers.SQLServer
             return await connection.QueryFirstOrDefaultAsync<Product>(sql, new { ProductID = productID });
         }
         /// <summary>
+        /// Lấy thông tin mặt hàng theo slug (case-insensitive)
+        /// </summary>
+        /// <param name="slug">Slug SEO</param>
+        /// <returns></returns>
+        public async Task<Product?> GetBySlugAsync(string slug)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = "SELECT * FROM Products WHERE LOWER(Slug) = LOWER(@Slug)";
+            return await connection.QueryFirstOrDefaultAsync<Product>(sql, new { Slug = slug });
+        }
+        /// <summary>
+        /// Kiểm tra slug đã tồn tại chưa
+        /// </summary>
+        public async Task<bool> SlugExistsAsync(string slug, int excludeProductID = 0)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = @"SELECT COUNT(*) FROM Products
+                           WHERE LOWER(Slug) = LOWER(@Slug)
+                             AND ProductID <> @ExcludeID";
+            int count = await connection.ExecuteScalarAsync<int>(sql, new { Slug = slug, ExcludeID = excludeProductID });
+            return count > 0;
+        }
+        /// <summary>
         /// Thêm một mặt hàng mới vào cơ sở dữ liệu, trả về mã mặt hàng vừa tạo
         /// </summary>
         /// <param name="data"></param>
@@ -105,8 +132,8 @@ namespace SGENERGY.DataLayers.SQLServer
             await connection.OpenAsync();
 
             string sql = @"
-                INSERT INTO Products(ProductName, ProductDescription, SupplierID, CategoryID, Unit, Price, Photo, IsSelling)
-                VALUES (@ProductName, @ProductDescription, @SupplierID, @CategoryID, @Unit, @Price, @Photo, @IsSelling);
+                INSERT INTO Products(ProductName, ProductDescription, SupplierID, CategoryID, Unit, Price, Photo, IsSelling, Slug)
+                VALUES (@ProductName, @ProductDescription, @SupplierID, @CategoryID, @Unit, @Price, @Photo, @IsSelling, @Slug);
                 SELECT SCOPE_IDENTITY();";
 
             return await connection.ExecuteScalarAsync<int>(sql, new
@@ -118,7 +145,8 @@ namespace SGENERGY.DataLayers.SQLServer
                 data.Unit,
                 data.Price,
                 data.Photo,
-                data.IsSelling
+                data.IsSelling,
+                data.Slug
             });
         }
         /// <summary>
@@ -141,7 +169,8 @@ namespace SGENERGY.DataLayers.SQLServer
                     Unit               = @Unit,
                     Price              = @Price,
                     Photo              = @Photo,
-                    IsSelling          = @IsSelling
+                    IsSelling          = @IsSelling,
+                    Slug               = @Slug
                 WHERE ProductID = @ProductID";
 
             int rowsAffected = await connection.ExecuteAsync(sql, new
@@ -154,6 +183,7 @@ namespace SGENERGY.DataLayers.SQLServer
                 data.Price,
                 data.Photo,
                 data.IsSelling,
+                data.Slug,
                 data.ProductID
             });
 

@@ -24,6 +24,27 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
+// SEO-friendly product routes — must be registered before the default route
+app.MapControllerRoute(
+    name: "product-list",
+    pattern: "san-pham",
+    defaults: new { controller = "Product", action = "Index" });
+
+app.MapControllerRoute(
+    name: "product-by-category",
+    pattern: "san-pham/loai-hang/{categorySlug}",
+    defaults: new { controller = "Product", action = "Index" });
+
+app.MapControllerRoute(
+    name: "product-by-supplier",
+    pattern: "san-pham/hang/{supplierSlug}",
+    defaults: new { controller = "Product", action = "Index" });
+
+app.MapControllerRoute(
+    name: "product-detail",
+    pattern: "san-pham/{slug}",
+    defaults: new { controller = "Product", action = "Detail" });
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,52 +1,83 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SGENERGY.Website.Models;
+using SGENERGY.BusinessLayers;
+using SGENERGY.DomainModels.Catalog;
 
 namespace SGENERGY.Website.Controllers;
 
 public class ProductController : Controller
 {
-    public IActionResult Index()
+    private const int PAGE_SIZE = 12;
+
+    /// <summary>
+    /// Trang danh sách sản phẩm — hỗ trợ tìm kiếm, lọc theo loại hàng / nhà cung cấp, phân trang.
+    /// URL patterns:
+    ///   /san-pham                          → tất cả
+    ///   /san-pham/loai-hang/{categorySlug} → lọc theo loại hàng
+    ///   /san-pham/hang/{supplierSlug}      → lọc theo nhà cung cấp
+    ///   ?q=...&amp;page=...               → tìm kiếm và phân trang qua query string
+    /// </summary>
+    public async Task<IActionResult> Index(
+        string? q,
+        int page = 1,
+        string? categorySlug = null,
+        string? supplierSlug = null)
     {
-        // Ảnh demo từ network (tạm thời)
-        var img = new[]
+        var input = new ProductSearchInput
         {
-            "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=70",
-            "https://images.unsplash.com/photo-1584277261846-c6a1672ed979?auto=format&fit=crop&w=800&q=70"
+            Page = page,
+            PageSize = PAGE_SIZE,
+            SearchValue = q ?? ""
         };
 
-        var vm = new ProductListVm
+        // Lọc theo loại hàng
+        if (!string.IsNullOrWhiteSpace(categorySlug))
         {
-            Title = "Tấm pin năng lượng mặt trời",
-            Categories = new()
-            {
-                new ProductCategoryVm { Name = "Tấm pin năng lượng mặt trời", Url = "/Products?cat=solar-panel", IsActive = true },
-                new ProductCategoryVm { Name = "Bộ chuyển điện - Inverter", Url = "/Products?cat=inverter" }
-            },
-            NewProducts = new()
-            {
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 450 WP", ImageUrl = img[4], DetailUrl = "/Products/Detail/5" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 530 - 555 WP", ImageUrl = img[2], DetailUrl = "/Products/Detail/3" }
-            },
-            Products = new()
-            {
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 570 WP (Hi-MO 6)", ImageUrl = img[0], DetailUrl = "/Products/Detail/1", BadgeText="G5.4" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 645 - 670 WP", ImageUrl = img[1], DetailUrl = "/Products/Detail/2", BadgeText="G5.6" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Risen 530 - 555 WP", ImageUrl = img[2], DetailUrl = "/Products/Detail/3", BadgeText="G5.6" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Canadian 405 WP", ImageUrl = img[3], DetailUrl = "/Products/Detail/4" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 450 WP", ImageUrl = img[4], DetailUrl = "/Products/Detail/5" },
-                new ProductCardVm { Name = "Tấm Pin Năng Lượng Mặt Trời Longi 445 WP", ImageUrl = img[5], DetailUrl = "/Products/Detail/6" }
-            },
-            Page = 1,
-            TotalPages = 3
-        };
+            var cat = await CatalogDataService.GetCategoryBySlugAsync(categorySlug);
+            input.CategoryID = cat?.CategoryID ?? -1; // -1 → không tìm thấy → trả về 0 kết quả
+            ViewBag.CurrentCategory = cat;
+        }
 
-        return View(vm);
+        // Lọc theo nhà cung cấp
+        if (!string.IsNullOrWhiteSpace(supplierSlug))
+        {
+            var sup = await PartnerDataService.GetSupplierBySlugAsync(supplierSlug);
+            input.SupplierID = sup?.SupplierID ?? -1;
+            ViewBag.CurrentSupplier = sup;
+        }
+
+        var pagedResult = await CatalogDataService.ListProductsAsync(input);
+
+        // Danh mục và nhà cung cấp cho sidebar
+        ViewBag.AllCategories = await CatalogDataService.ListAllCategoriesAsync();
+        ViewBag.AllSuppliers  = await PartnerDataService.ListAllSuppliersAsync();
+        ViewBag.Q             = q;
+        ViewBag.CategorySlug  = categorySlug;
+        ViewBag.SupplierSlug  = supplierSlug;
+
+        return View(pagedResult);
     }
 
-    // prototype detail để click "Xem chi tiết" không bị 404
-    public IActionResult Detail(int id) => Content($"Product detail prototype - id={id}");
+    /// <summary>
+    /// Trang chi tiết sản phẩm — URL: /san-pham/{slug}
+    /// </summary>
+    public async Task<IActionResult> Detail(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+            return NotFound();
+
+        var product = await CatalogDataService.GetProductBySlugAsync(slug);
+        if (product == null)
+            return NotFound();
+
+        ViewBag.Photos     = await CatalogDataService.ListPhotosAsync(product.ProductID);
+        ViewBag.Attributes = await CatalogDataService.ListAttributesAsync(product.ProductID);
+
+        if (product.CategoryID.HasValue)
+            ViewBag.Category = await CatalogDataService.GetCategoryAsync(product.CategoryID.Value);
+
+        if (product.SupplierID.HasValue)
+            ViewBag.Supplier = await PartnerDataService.GetSupplierAsync(product.SupplierID.Value);
+
+        return View(product);
+    }
 }

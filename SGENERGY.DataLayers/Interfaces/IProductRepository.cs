@@ -21,6 +21,19 @@ namespace SGENERGY.DataLayers.Interfaces
         /// <returns></returns>
         Task<Product?> GetAsync(int productID);
         /// <summary>
+        /// Lấy thông tin 1 mặt hàng theo slug (case-insensitive)
+        /// </summary>
+        /// <param name="slug">Slug SEO của mặt hàng</param>
+        /// <returns></returns>
+        Task<Product?> GetBySlugAsync(string slug);
+        /// <summary>
+        /// Kiểm tra slug đã tồn tại chưa (dùng để đảm bảo uniqueness)
+        /// </summary>
+        /// <param name="slug">Slug cần kiểm tra</param>
+        /// <param name="excludeProductID">Bỏ qua sản phẩm có ID này (dùng khi cập nhật)</param>
+        /// <returns></returns>
+        Task<bool> SlugExistsAsync(string slug, int excludeProductID = 0);
+        /// <summary>
         /// Bổ sung mặt hàng
         /// </summary>
         /// <param name="data"></param>

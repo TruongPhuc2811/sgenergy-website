@@ -33,5 +33,9 @@
         /// Email
         /// </summary>
         public string? Email { get; set; }
+        /// <summary>
+        /// Slug SEO của nhà cung cấp (ví dụ: longi-solar)
+        /// </summary>
+        public string? Slug { get; set; }
     }
 }
