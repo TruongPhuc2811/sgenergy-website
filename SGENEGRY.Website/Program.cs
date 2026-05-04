@@ -56,6 +56,19 @@ app.MapControllerRoute(
     pattern: "du-an/{slug}",
     defaults: new { controller = "Project", action = "Detail" });
 
+// SEO-friendly contact route
+app.MapControllerRoute(
+    name: "contact",
+    pattern: "lien-he",
+    defaults: new { controller = "Contact", action = "Index" });
+
+// Redirect legacy /Contact URL to SEO-friendly /lien-he
+app.MapGet("/Contact", ctx =>
+{
+    ctx.Response.Redirect("/lien-he", permanent: true);
+    return Task.CompletedTask;
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

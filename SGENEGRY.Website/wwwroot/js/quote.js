@@ -120,12 +120,7 @@
             city: String(form.querySelector("#city")?.value || "")
         };
 
-        console.log("QUOTE REQUEST (demo):", payload);
-        alert("Đã kiểm tra hợp lệ! (Demo) - Bạn có thể nối API để lưu DB và gửi mail.");
-        form.reset();
-
-        // reset UI
-        ranges.forEach(r => setRangeOutput(r));
-        fields.forEach(f => setFieldUI(f));
+        console.log("QUOTE REQUEST:", payload);
+        form.submit();
     });
 })();
