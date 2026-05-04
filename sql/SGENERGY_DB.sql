@@ -156,6 +156,8 @@ CREATE TABLE dbo.Projects (
 GO
 CREATE INDEX IX_Projects_IsActive ON dbo.Projects(IsActive, DisplayOrder)
 GO
+CREATE UNIQUE INDEX UX_Projects_Slug ON dbo.Projects(Slug) WHERE Slug IS NOT NULL
+GO
 
 
 -- ============================================================

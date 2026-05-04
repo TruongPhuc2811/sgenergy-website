@@ -69,5 +69,26 @@ BEGIN
 END
 GO
 
+-- 4. Projects.Slug
+IF NOT EXISTS (
+    SELECT 1 FROM sys.columns
+    WHERE object_id = OBJECT_ID('dbo.Projects') AND name = 'Slug'
+)
+BEGIN
+    ALTER TABLE dbo.Projects ADD Slug NVARCHAR(300) NULL;
+    PRINT 'Added Slug to Projects';
+END
+GO
+
+IF NOT EXISTS (
+    SELECT 1 FROM sys.indexes
+    WHERE object_id = OBJECT_ID('dbo.Projects') AND name = 'UX_Projects_Slug'
+)
+BEGIN
+    CREATE UNIQUE INDEX UX_Projects_Slug ON dbo.Projects(Slug) WHERE Slug IS NOT NULL;
+    PRINT 'Created UX_Projects_Slug';
+END
+GO
+
 PRINT 'Migration complete.';
 GO

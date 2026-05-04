@@ -45,6 +45,17 @@ app.MapControllerRoute(
     pattern: "san-pham/{slug}",
     defaults: new { controller = "Product", action = "Detail" });
 
+// SEO-friendly project routes
+app.MapControllerRoute(
+    name: "project-list",
+    pattern: "du-an",
+    defaults: new { controller = "Project", action = "Index" });
+
+app.MapControllerRoute(
+    name: "project-detail",
+    pattern: "du-an/{slug}",
+    defaults: new { controller = "Project", action = "Detail" });
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

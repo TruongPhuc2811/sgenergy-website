@@ -76,6 +76,27 @@ namespace SGENERGY.DataLayers.SQLServer
             return await connection.QueryFirstOrDefaultAsync<Project>(sql, new { ProjectID = projectID });
         }
 
+        public async Task<Project?> GetBySlugAsync(string slug)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = "SELECT * FROM Projects WHERE LOWER(Slug) = LOWER(@Slug) AND IsActive = 1";
+            return await connection.QueryFirstOrDefaultAsync<Project>(sql, new { Slug = slug });
+        }
+
+        public async Task<bool> SlugExistsAsync(string slug, int excludeProjectID = 0)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+
+            string sql = @"SELECT COUNT(*) FROM Projects
+                           WHERE LOWER(Slug) = LOWER(@Slug)
+                             AND ProjectID <> @ExcludeID";
+            int count = await connection.ExecuteScalarAsync<int>(sql, new { Slug = slug, ExcludeID = excludeProjectID });
+            return count > 0;
+        }
+
         public async Task<int> AddAsync(Project data)
         {
             using var connection = new SqlConnection(_connectionString);

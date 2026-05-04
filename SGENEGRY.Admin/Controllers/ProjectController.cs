@@ -84,6 +84,10 @@ namespace SGENERGY.Admin.Controllers
 
                 if (string.IsNullOrEmpty(data.Thumbnail)) data.Thumbnail = "nophoto.png";
 
+                // Auto-generate slug nếu chưa có
+                if (string.IsNullOrWhiteSpace(data.Slug))
+                    data.Slug = await SgEnergyDataService.GetUniqueProjectSlugAsync(data.ProjectName, data.ProjectID);
+
                 if (data.ProjectID == 0)
                 {
                     var newId = await SgEnergyDataService.AddProjectAsync(data);
