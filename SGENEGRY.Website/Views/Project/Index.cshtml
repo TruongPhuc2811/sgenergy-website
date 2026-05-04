@@ -1,9 +1,12 @@
-﻿@model SGENERGY.Website.Models.ProjectListVm
+@using SGENERGY.DomainModels.Sgenergy
+@model SGENERGY.DomainModels.Common.PagedResult<Project>
 @{
     ViewData["Title"] = "Dự Án";
+
+    string PageUrl(int p) => $"/du-an?page={p}";
 }
-@await Html.PartialAsync("_PageHero", new PageHeroVm {
-Title = "DỰ ÁN ĐÃ TRIỂN KHAI",
+@await Html.PartialAsync("_PageHero", new SGENERGY.Website.Models.PageHeroVm {
+    Title = "DỰ ÁN ĐÃ TRIỂN KHAI",
     BreadcrumbText = "Dự án",
     BackgroundImageUrl = "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=2000&q=70"
 })
@@ -11,11 +14,8 @@ Title = "DỰ ÁN ĐÃ TRIỂN KHAI",
     <div class="container project-page__container">
 
         <header class="project-header" data-aos="fade-up">
-            @if (!string.IsNullOrWhiteSpace(Model.HeadingSmall))
-            {
-                <span class="project-header__badge">@Model.HeadingSmall</span>
-            }
-            <h1 class="project-header__title">@Model.HeadingLarge</h1>
+            <span class="project-header__badge">CÁC DỰ ÁN NỔI BẬT MÀ DOANH NGHIỆP ĐÃ TRIỂN KHAI</span>
+            <h1 class="project-header__title">DỰ ÁN ĐÃ TRIỂN KHAI</h1>
             <p class="project-header__subtitle">Những dự án năng lượng xanh tiêu biểu đã được chúng tôi triển khai thành công</p>
             
             <div class="project-stats">
@@ -58,88 +58,98 @@ Title = "DỰ ÁN ĐÃ TRIỂN KHAI",
             </div>
         </header>
 
-        <div class="project-filter" data-aos="fade-up">
-            <div class="filter-label">
-                <i class="fa-solid fa-filter"></i>
-                <span>Lọc theo:</span>
+        @if (!Model.DataItems.Any())
+        {
+            <div class="alert alert-info mt-3">
+                <i class="fa-solid fa-circle-info me-2"></i>
+                Hiện chưa có dự án nào được đăng tải.
             </div>
-            <div class="filter-buttons">
-                <button class="filter-btn is-active" data-filter="all">
-                    <i class="fa-solid fa-layer-group"></i>
-                    Tất cả
-                </button>
-                <button class="filter-btn" data-filter="residential">
-                    <i class="fa-solid fa-house"></i>
-                    Hộ gia đình
-                </button>
-                <button class="filter-btn" data-filter="commercial">
-                    <i class="fa-solid fa-building"></i>
-                    Thương mại
-                </button>
-                <button class="filter-btn" data-filter="industrial">
-                    <i class="fa-solid fa-industry"></i>
-                    Công nghiệp
-                </button>
-            </div>
-        </div>
+        }
+        else
+        {
+            <div class="project-grid">
+                @foreach (var p in Model.DataItems)
+                {
+                    var detailUrl = $"/du-an/{(string.IsNullOrWhiteSpace(p.Slug) ? p.ProjectID.ToString() : p.Slug)}";
+                    var imgSrc = string.IsNullOrWhiteSpace(p.Thumbnail) || p.Thumbnail == "nophoto.png"
+                                 ? "/images/projects/nophoto.png"
+                                 : $"/images/projects/{p.Thumbnail}";
+                    <a class="project-card" href="@detailUrl" title="@p.ProjectName" data-aos="zoom-in">
+                        <div class="project-card__img">
+                            <img src="@imgSrc"
+                                 alt="@p.ProjectName"
+                                 loading="lazy"
+                                 onerror="this.src='/images/projects/nophoto.png'" />
+                            <div class="project-card__hover">
+                                <div class="project-card__icon">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="project-grid">
-            @foreach (var p in Model.Projects)
+                        <div class="project-card__overlay">
+                            <div class="project-card__content">
+                                <span class="project-card__category">
+                                    <i class="fa-solid fa-tag"></i>
+                                    Năng lượng xanh
+                                </span>
+                                <h3 class="project-card__name">@p.ProjectName</h3>
+                                <div class="project-card__meta">
+                                    @if (!string.IsNullOrWhiteSpace(p.Location))
+                                    {
+                                        <span class="meta-item">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            @p.Location
+                                        </span>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(p.Investor))
+                                    {
+                                        <span class="meta-item">
+                                            <i class="fa-solid fa-building"></i>
+                                            @p.Investor
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="project-card__arrow">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+            <!-- Phân trang -->
+            @if (Model.PageCount > 1)
             {
-                <a class="project-card" href="@p.DetailUrl" title="@p.Title" data-aos="zoom-in">
-                    <div class="project-card__img">
-                        <img src="@p.ImageUrl"
-                             alt="@p.Title"
-                             loading="lazy"
-                             referrerpolicy="no-referrer" />
-                        <div class="project-card__hover">
-                            <div class="project-card__icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card__overlay">
-                        <div class="project-card__content">
-                            <span class="project-card__category">
-                                <i class="fa-solid fa-tag"></i>
-                                Năng lượng xanh
-                            </span>
-                            <h3 class="project-card__name">@p.Title</h3>
-                            <div class="project-card__meta">
-                                <span class="meta-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    TP. Hồ Chí Minh
-                                </span>
-                                <span class="meta-item">
-                                    <i class="fa-solid fa-calendar"></i>
-                                    2026
-                                </span>
-                            </div>
-                        </div>
-                        <div class="project-card__arrow">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                <nav class="pagination project-pagination" aria-label="Phân trang" data-aos="fade-up">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <a class="page-btn page-btn--prev" href="@PageUrl(Model.Page - 1)" aria-label="Trang trước">
+                            <i class="fa-solid fa-chevron-left"></i><span>Trước</span>
+                        </a>
+                    }
+                    @foreach (var pg in Model.GetDisplayPages())
+                    {
+                        if (pg.IsEllipsis)
+                        {
+                            <span class="page-dots">…</span>
+                        }
+                        else
+                        {
+                            <a class="page-btn @(pg.IsCurrent ? "is-active" : "")"
+                               href="@PageUrl(pg.Page)">@pg.Page</a>
+                        }
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <a class="page-btn page-btn--next" href="@PageUrl(Model.Page + 1)" aria-label="Trang sau">
+                            <span>Sau</span><i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    }
+                </nav>
             }
-        </div>
-
-        <nav class="pagination project-pagination" aria-label="Pagination" data-aos="fade-up">
-            <a class="page-btn page-btn--prev" href="#" aria-label="Previous">
-                <i class="fa-solid fa-chevron-left"></i>
-                <span>Trước</span>
-            </a>
-            <a class="page-btn is-active" href="#">1</a>
-            <a class="page-btn" href="#">2</a>
-            <a class="page-btn" href="#">3</a>
-            <a class="page-btn" href="#">4</a>
-            <a class="page-btn" href="#">5</a>
-            <a class="page-btn page-btn--next" href="#" aria-label="Next">
-                <span>Sau</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
-        </nav>
+        }
 
     </div>
 </section>

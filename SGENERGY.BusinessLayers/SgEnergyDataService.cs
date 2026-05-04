@@ -39,6 +39,24 @@ namespace SGENERGY.BusinessLayers
         }
 
         /// <summary>
+        /// Lấy thông tin dự án theo slug (case-insensitive).
+        /// </summary>
+        public static async Task<Project?> GetProjectBySlugAsync(string slug)
+        {
+            return await projectDB.GetBySlugAsync(slug);
+        }
+
+        /// <summary>
+        /// Trả về slug duy nhất cho dự án (tự động thêm hậu tố -1, -2… nếu trùng).
+        /// </summary>
+        public static async Task<string> GetUniqueProjectSlugAsync(string baseName, int excludeProjectID = 0)
+        {
+            var baseSlug = SlugHelper.GenerateSlug(baseName);
+            return await SlugHelper.MakeUniqueAsync(baseSlug,
+                slug => projectDB.SlugExistsAsync(slug, excludeProjectID));
+        }
+
+        /// <summary>
         /// Bổ sung một dự án mới.
         /// </summary>
         public static async Task<int> AddProjectAsync(Project data)

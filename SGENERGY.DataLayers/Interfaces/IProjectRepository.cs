@@ -17,6 +17,14 @@ namespace SGENERGY.DataLayers.Interfaces
         /// </summary>
         Task<Project?> GetAsync(int projectID);
         /// <summary>
+        /// Lấy thông tin dự án theo slug (case-insensitive)
+        /// </summary>
+        Task<Project?> GetBySlugAsync(string slug);
+        /// <summary>
+        /// Kiểm tra slug đã tồn tại chưa (trả về true nếu đã tồn tại)
+        /// </summary>
+        Task<bool> SlugExistsAsync(string slug, int excludeProjectID = 0);
+        /// <summary>
         /// Bổ sung dự án
         /// </summary>
         Task<int> AddAsync(Project data);
